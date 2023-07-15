@@ -44,7 +44,10 @@ export async function Header() {
         <div className="flex items-center">
           <IconSeparator className="w-6 h-6 text-muted-foreground/50" />
           {session?.user ? (
-            <UserMenu user={session.user} />
+            <>
+              <UserMenu user={session.user} />
+              <Link href="/">Ask Brand</Link>
+            </>
           ) : (
             <Button variant="link" asChild className="-ml-2">
               <Link href="/sign-in?callbackUrl=/">Login</Link>
@@ -52,9 +55,11 @@ export async function Header() {
           )}
         </div>
       </div>
-      <div className="flex items-center justify-end space-x-2">
-            <h3>some cool stuff here.</h3>
-        </div>
+      <div className="flex items-center justify-start space-x-2">
+        <Link href="/">Ask Brand</Link>
+        <Link href="/create">Manage Brand</Link>
+        <Link href="/guide">Brand Guide</Link>
+      </div>
     </header>
   )
 }

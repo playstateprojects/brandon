@@ -1,0 +1,68 @@
+// This document was generated with the following prompt:
+// provide a json document which is an array of Jung's brand personality types. 
+// each personality type should have the following properties: 
+// title, 
+// description (limited to 250 chars) , 
+// traits(and array of strings in order of relavence).
+[
+    {
+        "title": "Innocent",
+        "description": "The Innocent brand archetype is optimistic and desires simplicity. They strive for innocence, goodness, and virtue.",
+        "traits": ["Optimistic", "Honest", "Enthusiastic", "Moral"]
+    },
+    {
+        "title": "Everyman",
+        "description": "The Everyman brand archetype seeks connection and belonging. They are down-to-earth and solidly dependable, emphasizing honesty and hard work.",
+        "traits": ["Relatable", "Dependable", "Hardworking", "Realistic"]
+    },
+    {
+        "title": "Hero",
+        "description": "The Hero brand archetype is courageous and wants to make a major impact. They are all about overcoming obstacles and achieving great things.",
+        "traits": ["Courageous", "Ambitious", "Inspirational", "Driven"]
+    },
+    {
+        "title": "Outlaw",
+        "description": "The Outlaw brand archetype is rebellious and wild. They aren't afraid to disrupt or break the rules to bring about change.",
+        "traits": ["Rebellious", "Rule-breaking", "Radical", "Free-spirited"]
+    },
+    {
+        "title": "Explorer",
+        "description": "The Explorer brand archetype is adventurous and loves to experience new things. They encourage people to break free from the mundane.",
+        "traits": ["Adventurous", "Independent", "Pioneering", "Spirited"]
+    },
+    {
+        "title": "Creator",
+        "description": "The Creator brand archetype is innovative and imaginative. They strive to create things of enduring value and integrity.",
+        "traits": ["Creative", "Visionary", "Inventive", "Authentic"]
+    },
+    {
+        "title": "Ruler",
+        "description": "The Ruler brand archetype is authoritative and wants to create a prosperous and successful family, company, or community.",
+        "traits": ["Authoritative", "Leadership-oriented", "Goal-driven", "Responsible"]
+    },
+    {
+        "title": "Magician",
+        "description": "The Magician brand archetype is transformative and wants to catalyze change. They aspire to turn dreams into reality.",
+        "traits": ["Inspirational", "Transformative", "Visionary", "Imaginative"]
+    },
+    {
+        "title": "Lover",
+        "description": "The Lover brand archetype is passionate and appreciates beauty. They aim to create relationships with people and experiences that people love.",
+        "traits": ["Passionate", "Inspiring", "Emotional", "Committed"]
+    },
+    {
+        "title": "Caregiver",
+        "description": "The Caregiver brand archetype is nurturing and desires to protect. They are generous, selfless, and want to help others.",
+        "traits": ["Nurturing", "Protective", "Generous", "Altruistic"]
+    },
+    {
+        "title": "Jester",
+        "description": "The Jester brand archetype is light-hearted and enjoys having a good time. They aim to bring joy to the world and make people laugh.",
+        "traits": ["Fun-loving", "Entertaining", "Joyful", "Humorous"]
+    },
+    {
+        "title": "Sage",
+        "description": "The Sage brand archetype seeks truth and shares knowledge. They strive to help the world gain wisdom and insight.",
+        "traits": ["Wise", "Knowledgeable", "Advisory", "Thought-provoking"]
+    }
+]

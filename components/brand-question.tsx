@@ -2,18 +2,20 @@
 
 import * as React from 'react'
 import { Button } from '@/components/ui/button'
+import { CenteredDiv } from './centered-div'
+import { kv } from '@vercel/kv';
 
 const brandQuestions = [
   {
-    question: 'What is the brand promise and value propositionWhat sector does your company operate in?',
+    question: 'What is the brand promise and value proposition',
     hint: `What is a "serverless function"?`
   },
   {
-    question: 'Summarize an article',
-    hint: 'Summarize the following article for a 2nd grader: \n'
+    question: 'What sector does your company operate in?',
+    hint: 'would a drop down help?'
   },
   {
-    question: 'Draft an email',
+    question: 'What is the brand’s golden circle ie. the Why? How? and What?',
     hint: `Draft an email to my boss about the following: \n`
   }
 ]
@@ -37,7 +39,7 @@ export function BrandQuestions() {
         }
     }
   return (
-    <div className="mx-auto max-w-2xl px-4">
+    <CenteredDiv>
       <div className="rounded-lg border bg-background p-8">
         <h1 className="mb-2 text-lg font-semibold">
           {brandQuestions[currentQuestion].question}
@@ -56,6 +58,6 @@ export function BrandQuestions() {
           next
         </Button>
       </div>
-    </div>
+    </CenteredDiv>
   )
 }
