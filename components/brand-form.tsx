@@ -145,7 +145,7 @@ export function BrandForm({ onFormSubmit, userBrand }: BrandQuestionsProps) {
       {questions.map((question, index) => (
         <div
           key={index}
-          className={index === currentQuestion ? 'mb-4' : 'hidden'}
+          className={index === currentQuestion ? 'mt-12' : 'hidden'}
         >
           <label
             htmlFor={`question-${index + 1}`}
@@ -159,29 +159,32 @@ export function BrandForm({ onFormSubmit, userBrand }: BrandQuestionsProps) {
             value={answers[index]}
             onChange={event => handleTextChange(event, index)}
             onKeyDown={event => handleKeyDown(event, index)}
-            className="w-full border rounded p-2"
+            className="w-full border rounded p-2 mt-4"
           />
         </div>
       ))}
-      <div>
+      <div className="flex items-center justify-between w-full mt-8">
         <Button
           type="button"
           variant="outline"
           onClick={prevQuestion}
-          className="bg-background"
+          className="hover:text-black bg-transparent border-2 border-[#E6FE52] rounded-full py-1 px-4 hover:bg-[#E6FE52] "
         >
           previous
+        </Button>
+        <Button
+          variant="outline"
+          className="hover:text-black bg-transparent border-2 border-[#E6FE52] rounded-full py-1 px-4 hover:bg-[#E6FE52] "
+        >
+          done
         </Button>
         <Button
           type="button"
           variant="outline"
           onClick={nextQuestion}
-          className="bg-background"
+          className="hover:text-black bg-transparent border-2 border-[#E6FE52] rounded-full py-1 px-4 hover:bg-[#E6FE52] "
         >
           next
-        </Button>
-        <Button variant="outline" className="bg-background">
-          done
         </Button>
       </div>
     </form>
