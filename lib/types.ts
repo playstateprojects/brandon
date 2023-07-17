@@ -25,6 +25,7 @@ export interface Brand {
   createdAt: Date
   userId: string
   properties?: BrandProperty[]
+  archetypeData?: ArchetypeData
 }
 
 export type ServerActionResult<Result> = Promise<
@@ -33,3 +34,19 @@ export type ServerActionResult<Result> = Promise<
       error: string
     }
 >
+
+export interface Archetype {
+  title: string
+  weight: number
+  explanation: string
+}
+
+export interface Trait {
+  title: string
+  weight: number
+}
+
+export interface ArchetypeData {
+  archetypes: Archetype[]
+  traits: Trait[]
+}

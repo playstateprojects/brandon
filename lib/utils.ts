@@ -1,6 +1,7 @@
 import { clsx, type ClassValue } from 'clsx'
 import { customAlphabet } from 'nanoid'
 import { twMerge } from 'tailwind-merge'
+import { ArchetypeData } from './types'
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -40,4 +41,13 @@ export function formatDate(input: string | number | Date): string {
     day: 'numeric',
     year: 'numeric'
   })
+}
+
+export function isArchetypeData(obj: any): obj is ArchetypeData {
+  return (
+    obj &&
+    typeof obj.title === 'string' &&
+    typeof obj.weight === 'number' &&
+    typeof obj.explanation === 'string'
+  )
 }

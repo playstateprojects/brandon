@@ -1,0 +1,36 @@
+{
+  "archetypes": [
+    {
+      "title": "Ruler",
+      "weight": 0.92,
+      "explanation": "IBM has long been a leading authority in the tech industry."
+    },
+    {
+      "title": "Creator",
+      "weight": 0.87,
+      "explanation": "IBM has a history of innovation and creating new technology."
+    },
+    {
+      "title": "Sage",
+      "weight": 0.83,
+      "explanation": "IBM's role as a source of wisdom and knowledge in the field of technology is well-known."
+    },
+    {
+      "title": "Magician",
+      "weight": 0.78,
+      "explanation": "IBM's ability to create innovative solutions gives it a 'Magician' quality."
+    },
+    {
+      "title": "Hero",
+      "weight": 0.74,
+      "explanation": "As a resilient player in the tech industry, IBM embodies some elements of the 'Hero' archetype."
+    }
+  ],
+  "traits": [
+    { "title": "Authoritative", "weight": 0.93 },
+    { "title": "Innovative", "weight": 0.78 },
+    { "title": "Intelligent", "weight": 0.84 },
+    { "title": "Visionary", "weight": 0.79 },
+    { "title": "Resilient", "weight": 0.76 }
+  ]
+}
