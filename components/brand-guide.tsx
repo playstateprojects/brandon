@@ -11,7 +11,13 @@ type BrandManagerProps = {
   brand: Brand | null
 }
 export function BrandGuide({ brand }: BrandManagerProps) {
-  if (!brand) return <></>
+  if (!brand) {
+    brand = {
+      id: '1',
+      userId: '1',
+      createdAt: new Date()
+    }
+  }
   const [userBrand, setUserBrand] = React.useState<Brand>(brand)
   return <>{brand && <BrandResults brand={userBrand} />}</>
 }

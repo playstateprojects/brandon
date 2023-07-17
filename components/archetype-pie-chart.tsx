@@ -40,7 +40,7 @@ const ArchetypePieChart: React.FC<ArchetypePieChartProps> = ({ data }) => {
   return (
     <>
       <Pie data={chartData} options={options} />
-      <h3>This chart isn't working yet</h3>
+      <h3>To be fixed</h3>
     </>
   )
 }

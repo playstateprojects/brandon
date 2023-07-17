@@ -37,8 +37,13 @@ export default async function ChatPage({ params }: ChatPageProps) {
   }
 
   const chat = await getChat(params.id, session.user.id)
-
-  if (!chat) {
+  let messages = []
+  if (chat) {
+    messages = chat.messages.map(message => ({
+      ...message,
+      id: message.id || 'default_id' // Replace 'default_id' with a suitable default or generated id
+    }))
+  } else {
     notFound()
   }
 
@@ -46,5 +51,5 @@ export default async function ChatPage({ params }: ChatPageProps) {
     notFound()
   }
 
-  return <Chat id={chat.id} initialMessages={chat.messages as string} />
+  return <Chat id={chat.id || '1'} initialMessages={messages} />
 }

@@ -119,10 +119,11 @@ export async function shareChat(chat: Chat) {
 
   return payload
 }
-
+let isSavingBrand = false
 export async function saveBrand(brand: Brand, userId: string): Promise<void> {
-  console.log('gggg', brand)
+  if (isSavingBrand) return
   try {
+    isSavingBrand = true
     const payload = {
       ...brand,
       userId
@@ -131,6 +132,8 @@ export async function saveBrand(brand: Brand, userId: string): Promise<void> {
     await kv.hmset(`brand:${userId}`, payload)
   } catch (error) {
     throw new Error('Failed to save brand')
+  } finally {
+    isSavingBrand = false
   }
 }
 
