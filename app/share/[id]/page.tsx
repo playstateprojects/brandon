@@ -1,4 +1,5 @@
 import { type Metadata } from 'next'
+import { Message } from 'ai'
 import { notFound } from 'next/navigation'
 
 import { formatDate } from '@/lib/utils'
@@ -27,9 +28,13 @@ export async function generateMetadata({
 
 export default async function SharePage({ params }: SharePageProps) {
   const chat = await getSharedChat(params.id)
-
+  let messages = []
   if (!chat || !chat?.sharePath) {
     notFound()
+  } else {
+    messages = chat.messages.map(msg => {
+      return msg as Message
+    })
   }
 
   return (
@@ -45,7 +50,7 @@ export default async function SharePage({ params }: SharePageProps) {
             </div>
           </div>
         </div>
-        <ChatList messages={chat.messages} />
+        <ChatList messages={messages} />
       </div>
       <FooterText className="py-8" />
     </>
