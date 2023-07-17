@@ -14,21 +14,21 @@ export function BrandResults({ brand }: BrandResutlsProps) {
     <>
       {brand && brand.archetypeData ? (
         <>
-          <section>
+          <section className="max-w-md mx-auto">
             <div>
-              <h2>Brand persona</h2>
+              <h2 className="text-4xl font-bold mb-4">Brand persona</h2>
 
               {brand.archetypeData.archetypes.map((archetype, index) => (
                 <React.Fragment key={index}>
-                  <h3>
+                  <h3 className="text-2xl font-bold">
                     {archetype.title} {archetype.weight}
                   </h3>
-                  <p>{archetype.explanation}</p>
+                  <p className="mb-4">{archetype.explanation}</p>
                 </React.Fragment>
               ))}
             </div>
+            <ArchetypePieChart data={brand.archetypeData} />
           </section>
-          <ArchetypePieChart data={brand.archetypeData} />
         </>
       ) : (
         <IconSpinner className="mr-2 animate-spin" />
