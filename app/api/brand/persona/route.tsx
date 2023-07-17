@@ -37,10 +37,12 @@ export async function POST(req: Request) {
     'you will respond with only a json object that follows the following format:'
   prompt += JSON.stringify(personaExample)
   const systemMessage: Message = {
+    id: '',
     content: prompt,
     role: 'system'
   }
   const userMessage: Message = {
+    id: '',
     content: propertiesJSON,
     role: 'user'
   }
