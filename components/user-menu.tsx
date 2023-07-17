@@ -24,6 +24,7 @@ function getUserInitials(name: string) {
 }
 
 export function UserMenu({ user }: UserMenuProps) {
+  const imageUrl = user?.image ?? ''
   return (
     <div className="flex items-center justify-between">
       <DropdownMenu>
@@ -32,7 +33,7 @@ export function UserMenu({ user }: UserMenuProps) {
             {user?.image ? (
               <Image
                 className="w-6 h-6 transition-opacity duration-300 rounded-full select-none ring-1 ring-zinc-100/10 hover:opacity-80"
-                src={user?.image ? `${user.image}&s=60` : ''}
+                src={imageUrl}
                 alt={user.name ?? 'Avatar'}
               />
             ) : (

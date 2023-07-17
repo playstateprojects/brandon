@@ -1,6 +1,7 @@
 import * as React from 'react'
 import Link from 'next/link'
 
+
 import { cn } from '@/lib/utils'
 import { auth } from '@/auth'
 import { clearChats } from '@/app/actions'
@@ -44,10 +45,7 @@ export async function Header() {
         <div className="flex items-center">
           <IconSeparator className="w-6 h-6 text-muted-foreground/50" />
           {session?.user ? (
-            <>
-              <UserMenu user={session.user} />
-              <Link href="/">Ask Brand</Link>
-            </>
+            <UserMenu user={session.user} />
           ) : (
             <Button variant="link" asChild className="-ml-2">
               <Link href="/sign-in?callbackUrl=/">Login</Link>
@@ -55,11 +53,18 @@ export async function Header() {
           )}
         </div>
       </div>
-      <div className="flex items-center justify-start space-x-2">
-        <Link href="/">Ask Brand</Link>
-        <Link href="/create">Manage Brand</Link>
-        <Link href="/guide">Brand Guide</Link>
-      </div>
+      <div className="flex items-center justify-middle space-x-2">
+            <Link href="/">
+              Ask Brand
+            </Link>
+            <Link href="/manage">
+              Manage Brand
+            </Link>
+            <Link href="/guide">
+              BrandGuide
+            </Link>
+            
+        </div>
     </header>
   )
 }

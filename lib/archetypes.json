@@ -1,9 +1,3 @@
-// This document was generated with the following prompt:
-// provide a json document which is an array of Jung's brand personality types. 
-// each personality type should have the following properties: 
-// title, 
-// description (limited to 250 chars) , 
-// traits(and array of strings in order of relavence).
 [
     {
         "title": "Innocent",

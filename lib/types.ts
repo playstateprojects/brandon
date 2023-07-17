@@ -1,4 +1,4 @@
-import { type Message} from 'ai'
+import { type Message } from 'ai'
 
 export interface Chat extends Record<string, any> {
   id: string
@@ -9,19 +9,22 @@ export interface Chat extends Record<string, any> {
   messages: Message[]
   sharePath?: string
 }
-
-export interface BrandProperty{
-  id: string
-  createdAt:Date
-  text: string
-  value: number
+export enum CreatedBy {
+  User = 'user',
+  System = 'system'
 }
-export interface Brand{
+export interface BrandProperty {
+  id?: string
+  createdAt: Date
+  description: string
+  value?: string
+  createdBy: CreatedBy
+}
+export interface Brand {
   id: string
   createdAt: Date
   userId: string
-  path: string
-  props: BrandProperty[]
+  properties?: BrandProperty[]
 }
 
 export type ServerActionResult<Result> = Promise<
