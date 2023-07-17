@@ -10,11 +10,25 @@ type BrandResutlsProps = {
 }
 
 export function BrandResults({ brand }: BrandResutlsProps) {
+  console.log(brand)
   return (
     <>
       {brand && brand.archetypeData ? (
         <>
-          <h1>got data</h1>
+          <section>
+            <div>
+              <h2>Brand persona</h2>
+
+              {brand.archetypeData.archetypes.map((archetype, index) => (
+                <React.Fragment key={index}>
+                  <h3>
+                    {archetype.title} {archetype.weight}
+                  </h3>
+                  <p>{archetype.explanation}</p>
+                </React.Fragment>
+              ))}
+            </div>
+          </section>
           <ArchetypePieChart data={brand.archetypeData} />
         </>
       ) : (

@@ -11,8 +11,7 @@ interface ArchetypePieChartProps {
 const ArchetypePieChart: React.FC<ArchetypePieChartProps> = ({ data }) => {
   // Extract the titles and weights from the archetypes
   const labels = data.archetypes.map((item: Archetype) => item.title)
-  const weights = data.archetypes.map((item: Archetype) => item.weight)
-  console.log(weights)
+  const weights = data.archetypes.map((item: Archetype) => item.weight * 100)
   // Define the colors
   const colors = ['#E6FE52', '#13191B', '#EFEFEF', '#FFFFFF']
 

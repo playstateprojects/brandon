@@ -24,7 +24,7 @@ export function BrandManager({ brand }: BrandManagerProps) {
         body: JSON.stringify(brand.properties)
       })
         .then(response => response.json())
-        .then(data => {
+        .then(async data => {
           console.log('data r', data)
           if (
             data.choices &&
@@ -33,9 +33,11 @@ export function BrandManager({ brand }: BrandManagerProps) {
             data.choices[0].message.content
           ) {
             const content = JSON.parse(data.choices[0].message.content)
+
             setUserBrand(prevValue => {
               return { ...prevValue, archetypeData: content }
             })
+            await saveBrand({ ...brand, archetypeData: content }, brand.userId)
           } else {
             alert('something went wrong!')
           }

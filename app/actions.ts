@@ -5,7 +5,7 @@ import { redirect } from 'next/navigation'
 import { kv } from '@vercel/kv'
 
 import { auth } from '@/auth'
-import { Brand, BrandProperty, type Chat } from '@/lib/types'
+import { ArchetypeData, Brand, BrandProperty, type Chat } from '@/lib/types'
 import { nanoid } from 'nanoid'
 
 export async function getChats(userId?: string | null) {
@@ -121,13 +121,13 @@ export async function shareChat(chat: Chat) {
 }
 
 export async function saveBrand(brand: Brand, userId: string): Promise<void> {
-  console.log('bb', brand)
+  console.log('gggg', brand)
   try {
     const payload = {
       ...brand,
       userId
     }
-
+    console.log('sbran', brand)
     await kv.hmset(`brand:${userId}`, payload)
   } catch (error) {
     throw new Error('Failed to save brand')
@@ -139,11 +139,13 @@ export async function getBrand(userId: string): Promise<Brand | null> {
     const brandData = await kv.hgetall(`brand:${userId}`)
 
     if (brandData) {
+      console.log('gjhfbdsjfhkb', brandData)
       // Create a new Brand object using the retrieved data
       const brand: Brand = {
         id: brandData.id as string,
         createdAt: brandData.createdAt as Date,
         properties: brandData.properties as BrandProperty[],
+        archetypeData: brandData.archetypeData as ArchetypeData,
         userId
       }
       return brand
@@ -156,6 +158,14 @@ export async function getBrand(userId: string): Promise<Brand | null> {
     }
     return newBrand
   } catch (error) {
-    throw new Error('Failed to retrieve brand')
+    console.log(error)
+    const newBrand: Brand = {
+      id: nanoid(),
+      createdAt: new Date(),
+      properties: [],
+      userId: userId
+    }
+    return newBrand
+    // throw new Error('Failed to retrieve brand')
   }
 }
