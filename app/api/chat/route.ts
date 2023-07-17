@@ -4,6 +4,8 @@ import { Configuration, OpenAIApi } from 'openai-edge'
 
 import { auth } from '@/auth'
 import { nanoid } from '@/lib/utils'
+import { getBrand } from '@/app/actions'
+import { AnonymousMessage } from '@/lib/types'
 
 export const runtime = 'edge'
 
@@ -23,7 +25,19 @@ export async function POST(req: Request) {
       status: 401
     })
   }
-
+  const persona = await getBrand(userId)
+  console.log(' got p')
+  if (persona) {
+    console.log('persona', persona)
+    let systemMessage: AnonymousMessage = {
+      content:
+        'You are the charchter full, personified voice of a brand. The brands Jungian persona is defined ny the following JOSN' +
+        persona +
+        'Adopt this persona when you answer any questions in this chat.',
+      role: 'system'
+    }
+    messages.push(systemMessage)
+  }
   if (previewToken) {
     configuration.apiKey = previewToken
   }
