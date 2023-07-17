@@ -10,7 +10,6 @@ type BrandResutlsProps = {
 }
 
 export function BrandResults({ brand }: BrandResutlsProps) {
-  console.log(brand)
   return (
     <>
       {brand && brand.archetypeData ? (

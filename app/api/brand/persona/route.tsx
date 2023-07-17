@@ -1,5 +1,5 @@
 import { Message, OpenAIStream, StreamingTextResponse } from 'ai'
-import { BrandProperty } from '../../../../lib/types'
+import { AnonymousMessage, BrandProperty } from '../../../../lib/types'
 import { Configuration, OpenAIApi } from 'openai-edge'
 import { nanoid } from '@/lib/utils'
 import personaExample from '@/lib/persona-example.json'
@@ -36,13 +36,11 @@ export async function POST(req: Request) {
   prompt +=
     'you will respond with only a json object that follows the following format:'
   prompt += JSON.stringify(personaExample)
-  const systemMessage: Message = {
-    id: '',
+  const systemMessage: AnonymousMessage = {
     content: prompt,
     role: 'system'
   }
-  const userMessage: Message = {
-    id: '',
+  const userMessage: AnonymousMessage = {
     content: propertiesJSON,
     role: 'user'
   }

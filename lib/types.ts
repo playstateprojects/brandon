@@ -1,12 +1,18 @@
 import { type Message } from 'ai'
 
+export interface AnonymousMessage {
+  id?: string
+  createdAt?: Date | undefined
+  content: string
+  role: 'system' | 'user' | 'assistant'
+}
 export interface Chat extends Record<string, any> {
   id: string
   title: string
   createdAt: Date
   userId: string
   path: string
-  messages: Message[]
+  messages: AnonymousMessage[]
   sharePath?: string
 }
 export enum CreatedBy {
