@@ -43,17 +43,18 @@ export async function Header() {
         </Link>
         <div className="flex items-center justify-center space-x-4 w-full">
           <Link
+            href="/manage"
+            className="hover:text-black bg-transparent border-2 border-[#E6FE52] rounded-full py-1 px-4 hover:bg-[#E6FE52] "
+          >
+            Create Brand
+          </Link>
+          <Link
             href="/"
             className="hover:text-black bg-transparent border-2 border-[#E6FE52] rounded-full py-1 px-4 hover:bg-[#E6FE52] "
           >
             Ask Brand
           </Link>
-          <Link
-            href="/manage"
-            className="hover:text-black bg-transparent border-2 border-[#E6FE52] rounded-full py-1 px-4 hover:bg-[#E6FE52] "
-          >
-            Manage Brand
-          </Link>
+
           <Link
             href="/guide"
             className="hover:text-black bg-transparent border-2 border-[#E6FE52] rounded-full py-1 px-4 hover:bg-[#E6FE52] "
