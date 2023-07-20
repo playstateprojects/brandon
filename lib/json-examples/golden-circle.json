@@ -1,0 +1,5 @@
+{
+  "why": "a string limitted to 250 charachters describing the brands core reason for existence and deeper motivation",
+  "what": "a string limitted to 250 charachters describing what the brand delivers to its customers (what they actual buy)",
+  "how": "a string limitted to 250 charachters describing how the brand delivers value"
+}

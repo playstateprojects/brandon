@@ -32,6 +32,7 @@ export interface Brand {
   userId: string
   properties?: BrandProperty[]
   archetypeData?: ArchetypeData
+  goldenCircle?: GoldenCircle
 }
 
 export type ServerActionResult<Result> = Promise<
@@ -55,4 +56,10 @@ export interface Trait {
 export interface ArchetypeData {
   archetypes: Archetype[]
   traits: Trait[]
+}
+
+export interface GoldenCircle {
+  why: string
+  what: string
+  how: string
 }

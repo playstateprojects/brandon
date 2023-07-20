@@ -22,7 +22,7 @@ export function BrandManager({ brand }: BrandManagerProps) {
 
   const formSubmitHandler = async (brand: Brand) => {
     if (brand.properties) {
-      fetch('/api/brand/persona', {
+      fetch('/api/brand/archetype', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

@@ -5,7 +5,13 @@ import { redirect } from 'next/navigation'
 import { kv } from '@vercel/kv'
 
 import { auth } from '@/auth'
-import { ArchetypeData, Brand, BrandProperty, type Chat } from '@/lib/types'
+import {
+  ArchetypeData,
+  Brand,
+  BrandProperty,
+  GoldenCircle,
+  type Chat
+} from '@/lib/types'
 import { nanoid } from 'nanoid'
 
 export async function getChats(userId?: string | null) {
@@ -128,7 +134,6 @@ export async function saveBrand(brand: Brand, userId: string): Promise<void> {
       ...brand,
       userId
     }
-    console.log('sbran', brand)
     await kv.hmset(`brand:${userId}`, payload)
   } catch (error) {
     throw new Error('Failed to save brand')
@@ -142,13 +147,13 @@ export async function getBrand(userId: string): Promise<Brand | null> {
     const brandData = await kv.hgetall(`brand:${userId}`)
 
     if (brandData) {
-      console.log('gjhfbdsjfhkb', brandData)
       // Create a new Brand object using the retrieved data
       const brand: Brand = {
         id: brandData.id as string,
         createdAt: brandData.createdAt as Date,
         properties: brandData.properties as BrandProperty[],
         archetypeData: brandData.archetypeData as ArchetypeData,
+        goldenCircle: brandData.goldenCircle as GoldenCircle,
         userId
       }
       return brand
@@ -170,5 +175,23 @@ export async function getBrand(userId: string): Promise<Brand | null> {
     }
     return newBrand
     // throw new Error('Failed to retrieve brand')
+  }
+}
+
+export async function getGoldenCircle(brand: Brand) {
+  const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL
+  const res = await fetch(`${serverUrl}/api/brand/golden-circle`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(brand.properties)
+  })
+  console.log(res)
+  try {
+    return res.json()
+  } catch (error) {
+    console.error(error)
+    return []
   }
 }

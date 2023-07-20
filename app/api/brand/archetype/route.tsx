@@ -2,7 +2,7 @@ import { Message, OpenAIStream, StreamingTextResponse } from 'ai'
 import { AnonymousMessage, BrandProperty } from '../../../../lib/types'
 import { Configuration, OpenAIApi } from 'openai-edge'
 import { nanoid } from '@/lib/utils'
-import personaExample from '@/lib/persona-example.json'
+import personaExample from '@/lib/json-examples/persona-example.json'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { auth } from '@/auth'
 
@@ -30,7 +30,7 @@ export async function POST(req: Request) {
     })
   }
   let prompt =
-    'you are a JSON API and will be seent a json object of questions and answer which describe a brand.'
+    'you are a JSON API and will be sent a json object of questions and answer which describe a brand.'
   prompt +=
     'determin a provide a recomended jungian archetype that this brand could adopt that would express its values and differentiate it from its competitors.'
   prompt +=
