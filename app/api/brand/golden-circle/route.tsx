@@ -37,7 +37,6 @@ export async function POST(req: Request) {
       status: 401
     })
   }
-  console.log('here-------------------')
   const brand = await getBrand(userId)
   let prompt = `As a JSON API, you will receive a JSON object consisting of a set of questions and answers describing a brand. 
         Using this information, your task is to generate a brand’s golden circle according to Simon Sinek’s framework, namely the 'Why?', 'How?', and 'What?'`
