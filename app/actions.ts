@@ -142,7 +142,7 @@ export async function saveBrand(brand: Brand, userId: string): Promise<void> {
   }
 }
 
-export async function getBrand(userId: string): Promise<Brand | null> {
+export async function getBrand(userId: string): Promise<Brand> {
   try {
     const brandData = await kv.hgetall(`brand:${userId}`)
 

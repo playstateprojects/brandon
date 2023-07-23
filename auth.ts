@@ -1,6 +1,6 @@
 import NextAuth, { type DefaultSession } from 'next-auth'
 import GitHub from 'next-auth/providers/github'
-import Discord from "next-auth/providers/discord"
+import Discord from 'next-auth/providers/discord'
 
 declare module 'next-auth' {
   interface Session {
@@ -16,7 +16,13 @@ export const {
   auth,
   CSRF_experimental // will be removed in future
 } = NextAuth({
-  providers: [GitHub, Discord({ clientId: process.env.DISCORD_CLIENT_ID, clientSecret: process.env.DISCORD_CLIENT_SECRET })],
+  providers: [
+    GitHub,
+    Discord({
+      clientId: process.env.DISCORD_CLIENT_ID,
+      clientSecret: process.env.DISCORD_CLIENT_SECRET
+    })
+  ],
   callbacks: {
     jwt({ token, profile }) {
       if (profile) {

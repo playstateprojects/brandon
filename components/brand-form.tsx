@@ -3,8 +3,13 @@
 import * as React from 'react'
 import { Button } from '@/components/ui/button'
 import { Brand, BrandProperty, CreatedBy } from '@/lib/types'
+import { Tooltip, TooltipContent, TooltipTrigger } from './ui/tooltip'
 
 const questions = [
+  {
+    question: 'What is your brand name?',
+    hint: `Don't worry you can always change this later. Soon we'll be adding a tool to help you and your team brain storm brand names.`
+  },
   {
     question: 'What sector does your company operate in?',
     hint: 'Think about the broader industry context. For example: tech, healthcare, finance, etc.'
@@ -85,10 +90,7 @@ export function BrandForm({ onFormSubmit, userBrand }: BrandQuestionsProps) {
     setAnswers(newAnswers)
   }
 
-  const handleKeyDown = (
-    event: React.KeyboardEvent<HTMLTextAreaElement>,
-    index: number
-  ) => {
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
     // If the enter key was pressed, submit the form
     if (event.key === 'Enter') {
       event.preventDefault()
@@ -99,6 +101,8 @@ export function BrandForm({ onFormSubmit, userBrand }: BrandQuestionsProps) {
   const nextQuestion = React.useCallback(() => {
     if (currentQuestion < questions.length - 1) {
       setCurrentQuestion(prev => prev + 1)
+    } else {
+      handleSubmit()
     }
   }, [currentQuestion])
   const prevQuestion = () => {
@@ -106,8 +110,7 @@ export function BrandForm({ onFormSubmit, userBrand }: BrandQuestionsProps) {
       setCurrentQuestion(prev => prev - 1)
     }
   }
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
+  const handleSubmit = () => {
     // Perform actions with the submitted answers
     answers.forEach((answer, index) => {
       if (answer != '') {
@@ -147,18 +150,23 @@ export function BrandForm({ onFormSubmit, userBrand }: BrandQuestionsProps) {
           key={index}
           className={index === currentQuestion ? 'mt-12' : 'hidden'}
         >
-          <label
-            htmlFor={`question-${index + 1}`}
-            className="block font-semibold mb-1"
-          >
-            {currentQuestion + 1}/{questions.length} {question.question}
-          </label>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <label
+                htmlFor={`question-${index + 1}`}
+                className="block font-semibold mb-1"
+              >
+                {currentQuestion + 1}/{questions.length} {question.question}
+              </label>
+            </TooltipTrigger>
+            <TooltipContent>{question.hint}</TooltipContent>
+          </Tooltip>
           <textarea
             ref={el => (textAreaRefs.current[index] = el)}
             id={`question-${index + 1}`}
             value={answers[index]}
             onChange={event => handleTextChange(event, index)}
-            onKeyDown={event => handleKeyDown(event, index)}
+            onKeyDown={event => handleKeyDown(event)}
             className="w-full border rounded p-2 mt-4"
           />
         </div>
@@ -172,12 +180,12 @@ export function BrandForm({ onFormSubmit, userBrand }: BrandQuestionsProps) {
         >
           previous
         </Button>
-        <Button
+        {/* <Button
           variant="outline"
           className="hover:text-black bg-transparent border-2 border-[#E6FE52] rounded-full py-1 px-4 hover:bg-[#E6FE52] "
         >
           done
-        </Button>
+        </Button> */}
         <Button
           type="button"
           variant="outline"

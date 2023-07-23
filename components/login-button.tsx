@@ -21,24 +21,24 @@ export function LoginButton({
   const [isLoading, setIsLoading] = React.useState(false)
   return (
     <div className="flex flex-col ">
-      {/* <Button
-      variant="outline"
-      onClick={() => {
-        setIsLoading(true)
-        // next-auth signIn() function doesn't work yet at Edge Runtime due to usage of BroadcastChannel
-        signIn('github', { callbackUrl: `/` })
-      }}
-      disabled={isLoading}
-      className={cn(className)}
-      {...props}
-    >
-      {isLoading ? (
-        <IconSpinner className="mr-2 animate-spin" />
-      ) : showGithubIcon ? (
-        <IconGitHub className="mr-2" />
-      ) : null}
-      {text}
-    </Button> */}
+      <Button
+        variant="outline"
+        onClick={() => {
+          setIsLoading(true)
+          // next-auth signIn() function doesn't work yet at Edge Runtime due to usage of BroadcastChannel
+          signIn('github', { callbackUrl: `/` })
+        }}
+        disabled={isLoading}
+        className={cn(className)}
+        {...props}
+      >
+        {isLoading ? (
+          <IconSpinner className="mr-2 animate-spin" />
+        ) : showGithubIcon ? (
+          <IconGitHub className="mr-2" />
+        ) : null}
+        {text}
+      </Button>
       <Button
         variant="outline"
         onClick={() => {

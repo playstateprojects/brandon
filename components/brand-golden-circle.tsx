@@ -5,7 +5,7 @@ import { ArchetypeData, Brand, GoldenCircle } from '@/lib/types'
 import { IconArrowLeft, IconSpinner } from './ui/icons'
 import ArchetypePieChart from './archetype-pie-chart'
 import { Button } from './ui/button'
-import { getGoldenCircle } from '@/app/actions'
+import { getGoldenCircle, saveBrand } from '@/app/actions'
 import { CircleSelector } from './circle-selector'
 import { LoaderIcon } from 'react-hot-toast'
 type BrandGoldenCirclesProps = {
@@ -13,8 +13,11 @@ type BrandGoldenCirclesProps = {
 }
 
 export function BrandGoldenCircle({ brand }: BrandGoldenCirclesProps) {
-  const [circle, setCircle] = React.useState<GoldenCircle[]>([])
+  const [circle, setCircle] = React.useState<GoldenCircle[]>(
+    brand.goldenCircle ? [brand.goldenCircle] : []
+  )
   const [isLoading, setIsLoading] = React.useState(false)
+
   const fetchCircle = async () => {
     setIsLoading(true)
     const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL
@@ -32,28 +35,43 @@ export function BrandGoldenCircle({ brand }: BrandGoldenCirclesProps) {
 
     // Convert the response body to JSON
     const json = await res.json()
-
     // Assert the type of the JSON
-    setCircle(JSON.parse(json) as GoldenCircle[])
+    const updatedCircle = JSON.parse(json) as GoldenCircle[]
+    setCircle(updatedCircle)
+  }
+  type AllowedSections = 'why' | 'what' | 'how'
+  const saveCircle = (section: AllowedSections, value: string) => {
+    const newBrand: Brand = {
+      ...brand,
+      goldenCircle: { ...brand.goldenCircle, [section]: value } as GoldenCircle
+    }
+    saveBrand(newBrand, brand.userId)
   }
   return (
     <div className="mx-auto max-w-2xl px-4 w-full mt-12 mb-12">
-      {circle.length > 1 && (
+      {circle.length && (
         <div className="w-full">
           <CircleSelector
-            options={circle.map(option => option.why)}
+            initialOptions={circle.map(option => option.why)}
             title="Why"
-          ></CircleSelector>
+            saveFunction={(value: string) => saveCircle('why', value)}
+            index={circle.length > 1 ? 1 : 0}
+          />
           <CircleSelector
-            options={circle.map(option => option.how)}
+            initialOptions={circle.map(option => option.how)}
             title="How"
-          ></CircleSelector>
+            saveFunction={(value: string) => saveCircle('how', value)}
+            index={circle.length > 1 ? 1 : 0}
+          />
           <CircleSelector
-            options={circle.map(option => option.what)}
+            initialOptions={circle.map(option => option.what)}
             title="What"
-          ></CircleSelector>
+            saveFunction={(value: string) => saveCircle('what', value)}
+            index={circle.length > 1 ? 1 : 0}
+          />
         </div>
       )}
+
       <div className="w-full flex justify-center items-center">
         <Button
           type="button"

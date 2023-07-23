@@ -14,7 +14,7 @@ type BrandResultsProps = {
 export function BrandResults({ brand }: BrandResultsProps) {
   return (
     <>
-      {brand && <BrandGoldenCircle brand={brand}></BrandGoldenCircle>}
+      <BrandGoldenCircle brand={brand}></BrandGoldenCircle>
       {brand && brand.archetypeData && (
         <BrandArchetype archetypeData={brand.archetypeData}></BrandArchetype>
       )}

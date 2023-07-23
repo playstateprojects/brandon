@@ -7,7 +7,7 @@ import { saveBrand } from '@/app/actions'
 import { BrandForm } from './brand-form'
 
 type BrandManagerProps = {
-  brand: Brand | null
+  brand: Brand
 }
 export function BrandManager({ brand }: BrandManagerProps) {
   const [formSubmitted, setFormSubmitted] = React.useState(false)

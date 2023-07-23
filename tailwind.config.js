@@ -13,6 +13,9 @@ module.exports = {
       }
     },
     extend: {
+      minHeight: {
+        'screen-100': 'calc(100vh - 100px)'
+      },
       fontFamily: {
         sans: ['var(--font-sans)', ...fontFamily.sans]
       },

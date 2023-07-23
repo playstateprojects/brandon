@@ -26,8 +26,17 @@ export default async function CreatePage() {
   }
   const userBrand = await getBrand(session.user.id)
   return (
-    <div className="mx-auto max-w-2xl px-4">
-      {userBrand && <BrandManager brand={userBrand} />}
+    <div className="mx-auto max-w-6xl px-4">
+      <div className="mt-8">
+        <h1 className="mb-2 text-lg font-semibold">
+          Let's get to know each other!
+        </h1>
+        <p>
+          Please answer a couple of questions about your brand so I can tailor
+          my responses to your particular blend of awesome.
+        </p>
+      </div>
+      {userBrand.properties && <BrandManager brand={userBrand} />}
     </div>
   )
 }
