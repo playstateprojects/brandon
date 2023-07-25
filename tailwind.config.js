@@ -19,6 +19,12 @@ module.exports = {
       fontFamily: {
         sans: ['var(--font-sans)', ...fontFamily.sans]
       },
+      borderColor: {
+        'custom-green': 'hsl(75, 83%, 68%)'
+      },
+      borderOpacity: {
+        20: '0.2'
+      },
       colors: {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',

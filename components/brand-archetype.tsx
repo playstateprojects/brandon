@@ -24,6 +24,8 @@ export function BrandArchetype({ archetypeData }: BrandArchetypeProps) {
                     {archetype.title} {archetype.weight}
                   </h3>
                   <p className="mb-4">{archetype.explanation}</p>
+                  <h4 className="text-xl font-bold">Tone of voice</h4>
+                  <p className="mb-4">{archetype.tone}</p>
                 </React.Fragment>
               ))}
             </div>

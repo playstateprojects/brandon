@@ -31,9 +31,9 @@ export async function POST(req: Request) {
     console.log('persona', persona)
     let systemMessage: AnonymousMessage = {
       content:
-        'You are the charchter full, personified voice of a brand. The brands Jungian persona is defined ny the following JOSN' +
+        'You should adopt the persona of a brand. The brands Jungian persona is defined ny the following JSON' +
         persona +
-        'Adopt this persona when you answer any questions in this chat.',
+        ' Adopt this persona when you answer any questions in this chat.',
       role: 'system'
     }
     messages.push(systemMessage)

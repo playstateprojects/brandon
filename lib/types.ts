@@ -33,6 +33,7 @@ export interface Brand {
   properties?: BrandProperty[]
   archetypeData?: ArchetypeData
   goldenCircle?: GoldenCircle
+  tone?: ToneOfVoice
 }
 
 export type ServerActionResult<Result> = Promise<
@@ -42,10 +43,20 @@ export type ServerActionResult<Result> = Promise<
     }
 >
 
+export interface ToneOfVoice {
+  language: string
+  rhythm: string
+  humor: string
+  formality: string
+  empathy: string
+  storytelling: string
+  summary: string
+}
 export interface Archetype {
   title: string
   weight: number
   explanation: string
+  tone: string
 }
 
 export interface Trait {
@@ -62,4 +73,11 @@ export interface GoldenCircle {
   why: string
   what: string
   how: string
+}
+export type ApiResponse = {
+  choices: Array<{
+    message: {
+      content: string
+    }
+  }>
 }

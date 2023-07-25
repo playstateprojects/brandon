@@ -5,7 +5,7 @@ import { ArchetypeData, Brand, GoldenCircle } from '@/lib/types'
 import { IconArrowLeft, IconSpinner } from './ui/icons'
 import ArchetypePieChart from './archetype-pie-chart'
 import { Button } from './ui/button'
-import { getGoldenCircle, saveBrand } from '@/app/actions'
+import { saveBrand } from '@/app/actions'
 import { CircleSelector } from './circle-selector'
 import { LoaderIcon } from 'react-hot-toast'
 type BrandGoldenCirclesProps = {
@@ -16,8 +16,16 @@ export function BrandGoldenCircle({ brand }: BrandGoldenCirclesProps) {
   const [circle, setCircle] = React.useState<GoldenCircle[]>(
     brand.goldenCircle ? [brand.goldenCircle] : []
   )
+  const [whyOptions, setWhyOptions] = React.useState<string[]>(
+    brand.goldenCircle ? [brand.goldenCircle.why] : []
+  )
+  const [whatOptions, setWhatOptions] = React.useState<string[]>(
+    brand.goldenCircle ? [brand.goldenCircle.what] : []
+  )
+  const [howOptions, setHowOptions] = React.useState<string[]>(
+    brand.goldenCircle ? [brand.goldenCircle.how] : []
+  )
   const [isLoading, setIsLoading] = React.useState(false)
-
   const fetchCircle = async () => {
     setIsLoading(true)
     const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL
@@ -36,9 +44,16 @@ export function BrandGoldenCircle({ brand }: BrandGoldenCirclesProps) {
     // Convert the response body to JSON
     const json = await res.json()
     // Assert the type of the JSON
-    const updatedCircle = JSON.parse(json) as GoldenCircle[]
-    setCircle(updatedCircle)
+    const updatedCircle = (await JSON.parse(json)) as GoldenCircle[]
+    const newWhyOptions = updatedCircle.map(option => option.why)
+    const newWhatOptions = updatedCircle.map(option => option.what)
+    const newHowOptions = updatedCircle.map(option => option.how)
+    setWhyOptions([...newWhyOptions])
+    setWhatOptions([...newWhatOptions])
+    setHowOptions([...newHowOptions])
+    setCircle([...updatedCircle])
   }
+
   type AllowedSections = 'why' | 'what' | 'how'
   const saveCircle = (section: AllowedSections, value: string) => {
     const newBrand: Brand = {
@@ -49,29 +64,28 @@ export function BrandGoldenCircle({ brand }: BrandGoldenCirclesProps) {
   }
   return (
     <div className="mx-auto max-w-2xl px-4 w-full mt-12 mb-12">
-      {circle.length && (
+      {circle.length > 0 && (
         <div className="w-full">
           <CircleSelector
-            initialOptions={circle.map(option => option.why)}
+            initialOptions={whyOptions}
             title="Why"
             saveFunction={(value: string) => saveCircle('why', value)}
-            index={circle.length > 1 ? 1 : 0}
+            index={whyOptions.length > 1 ? 1 : 0}
           />
           <CircleSelector
-            initialOptions={circle.map(option => option.how)}
+            initialOptions={howOptions}
             title="How"
             saveFunction={(value: string) => saveCircle('how', value)}
-            index={circle.length > 1 ? 1 : 0}
+            index={howOptions.length > 1 ? 1 : 0}
           />
           <CircleSelector
-            initialOptions={circle.map(option => option.what)}
+            initialOptions={whatOptions}
             title="What"
             saveFunction={(value: string) => saveCircle('what', value)}
-            index={circle.length > 1 ? 1 : 0}
+            index={whatOptions.length > 1 ? 1 : 0}
           />
         </div>
       )}
-
       <div className="w-full flex justify-center items-center">
         <Button
           type="button"

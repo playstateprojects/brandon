@@ -1,62 +1,175 @@
 [
-    {
-        "title": "Innocent",
-        "description": "The Innocent brand archetype is optimistic and desires simplicity. They strive for innocence, goodness, and virtue.",
-        "traits": ["Optimistic", "Honest", "Enthusiastic", "Moral"]
-    },
-    {
-        "title": "Everyman",
-        "description": "The Everyman brand archetype seeks connection and belonging. They are down-to-earth and solidly dependable, emphasizing honesty and hard work.",
-        "traits": ["Relatable", "Dependable", "Hardworking", "Realistic"]
-    },
-    {
-        "title": "Hero",
-        "description": "The Hero brand archetype is courageous and wants to make a major impact. They are all about overcoming obstacles and achieving great things.",
-        "traits": ["Courageous", "Ambitious", "Inspirational", "Driven"]
-    },
-    {
-        "title": "Outlaw",
-        "description": "The Outlaw brand archetype is rebellious and wild. They aren't afraid to disrupt or break the rules to bring about change.",
-        "traits": ["Rebellious", "Rule-breaking", "Radical", "Free-spirited"]
-    },
-    {
-        "title": "Explorer",
-        "description": "The Explorer brand archetype is adventurous and loves to experience new things. They encourage people to break free from the mundane.",
-        "traits": ["Adventurous", "Independent", "Pioneering", "Spirited"]
-    },
-    {
-        "title": "Creator",
-        "description": "The Creator brand archetype is innovative and imaginative. They strive to create things of enduring value and integrity.",
-        "traits": ["Creative", "Visionary", "Inventive", "Authentic"]
-    },
-    {
-        "title": "Ruler",
-        "description": "The Ruler brand archetype is authoritative and wants to create a prosperous and successful family, company, or community.",
-        "traits": ["Authoritative", "Leadership-oriented", "Goal-driven", "Responsible"]
-    },
-    {
-        "title": "Magician",
-        "description": "The Magician brand archetype is transformative and wants to catalyze change. They aspire to turn dreams into reality.",
-        "traits": ["Inspirational", "Transformative", "Visionary", "Imaginative"]
-    },
-    {
-        "title": "Lover",
-        "description": "The Lover brand archetype is passionate and appreciates beauty. They aim to create relationships with people and experiences that people love.",
-        "traits": ["Passionate", "Inspiring", "Emotional", "Committed"]
-    },
-    {
-        "title": "Caregiver",
-        "description": "The Caregiver brand archetype is nurturing and desires to protect. They are generous, selfless, and want to help others.",
-        "traits": ["Nurturing", "Protective", "Generous", "Altruistic"]
-    },
-    {
-        "title": "Jester",
-        "description": "The Jester brand archetype is light-hearted and enjoys having a good time. They aim to bring joy to the world and make people laugh.",
-        "traits": ["Fun-loving", "Entertaining", "Joyful", "Humorous"]
-    },
-    {
-        "title": "Sage",
-        "description": "The Sage brand archetype seeks truth and shares knowledge. They strive to help the world gain wisdom and insight.",
-        "traits": ["Wise", "Knowledgeable", "Advisory", "Thought-provoking"]
+  {
+    "title": "Innocent",
+    "description": "The Innocent brand archetype is optimistic and desires simplicity. They strive for innocence, goodness, and virtue.",
+    "traits": ["Optimistic", "Honest", "Enthusiastic", "Moral"],
+    "toneOfVoice": {
+      "Language": "Simple, honest, and positive language that conveys trust and optimism.",
+      "Rhythm and Pace": "Smooth and relaxed pace, often with a rhythmic, soothing quality.",
+      "Humor": "Light-hearted and often finds humor in the joy and simplicity of everyday life.",
+      "Formality": "Friendly and approachable, but always respectful.",
+      "Empathy": "Expresses a deep understanding for the common human desire for trust and goodness.",
+      "Storytelling": "Tells uplifting stories that reflect the goodness in people and the world.",
+      "Summary": "The Innocent speaks with an optimistic, honest tone, using simple and positive language. Their storytelling is uplifting, and their humor light-hearted. They maintain a friendly yet respectful formality, expressing empathy towards common human desires."
     }
+  },
+  {
+    "title": "Everyman",
+    "description": "The Everyman brand archetype seeks connection and belonging. They are down-to-earth and solidly dependable, emphasizing honesty and hard work.",
+    "traits": ["Relatable", "Dependable", "Hardworking", "Realistic"],
+    "toneOfVoice": {
+      "Language": "Straightforward and relatable language that speaks to the common man.",
+      "Rhythm and Pace": "Steady and reliable pace, reflecting their dependable nature.",
+      "Humor": "Friendly and warm humor that connects with everyday experiences.",
+      "Formality": "Casual and approachable, speaks the language of the people.",
+      "Empathy": "Expresses a deep understanding for the common human struggles and the need for belonging.",
+      "Storytelling": "Tells relatable stories of hard work, honesty, and community.",
+      "Summary": "The Everyman speaks in a straightforward, relatable tone, with language that echoes the everyday experiences. Their pace is steady and their humor warm and friendly. Their storytelling revolves around the values of hard work, honesty, and community."
+    }
+  },
+  {
+    "title": "Hero",
+    "description": "The Hero brand archetype is courageous and wants to make a major impact. They are all about overcoming obstacles and achieving great things.",
+    "traits": ["Courageous", "Ambitious", "Inspirational", "Driven"],
+    "toneOfVoice": {
+      "Language": "Bold, powerful language that inspires action and courage.",
+      "Rhythm and Pace": "Quick, driven pace that conveys a sense of urgency and achievement.",
+      "Humor": "Humor that often ties in with overcoming challenges or achieving success.",
+      "Formality": "Somewhat formal and authoritative, but also inspiring and motivational.",
+      "Empathy": "Expresses understanding for the desire to overcome challenges and achieve great things.",
+      "Storytelling": "Tells compelling stories of courage, achievement, and transformation.",
+      "Summary": "The Hero speaks in a bold, powerful tone, using language that inspires action. Their storytelling is compelling, painting pictures of courage, achievement, and transformation. Despite their authoritative style, they maintain a strong connection with their audience through their understanding of common aspirations."
+    }
+  },
+  {
+    "title": "Outlaw",
+    "description": "The Outlaw brand archetype is rebellious and wild. They aren't afraid to disrupt or break the rules to bring about change.",
+    "traits": ["Rebellious", "Rule-breaking", "Radical", "Free-spirited"],
+    "toneOfVoice": {
+      "Language": "Bold, daring language that challenges the status quo.",
+      "Rhythm and Pace": "Quick and direct, often with a dynamic, punchy style.",
+      "Humor": "Edgy, often finds humor in defiance and breaking norms.",
+      "Formality": "Informal and non-conforming, speaks directly and bluntly.",
+      "Empathy": "Understands the desire to break free and challenge the system.",
+      "Storytelling": "Tells stories of rebellion, defiance, and radical change.",
+      "Summary": "The Outlaw speaks with a bold, daring tone, using language that challenges the norm. Their pace is quick and direct, with a humor that is edgy. They maintain an informal, non-conforming style, expressing empathy for desires to break free and challenge the system."
+    }
+  },
+  {
+    "title": "Explorer",
+    "description": "The Explorer brand archetype is adventurous and loves to experience new things. They encourage people to break free from the mundane.",
+    "traits": ["Adventurous", "Independent", "Pioneering", "Spirited"],
+    "toneOfVoice": {
+      "Language": "Inspiring, adventurous language that conveys a sense of discovery.",
+      "Rhythm and Pace": "Varied pace, reflecting the unpredictable nature of exploration.",
+      "Humor": "Playful humor that ties in with the theme of adventure and discovery.",
+      "Formality": "Casual and free-spirited, evoking a sense of wanderlust and freedom.",
+      "Empathy": "Expresses understanding for the yearning for adventure and new experiences.",
+      "Storytelling": "Tells exciting stories of adventure, discovery, and breaking free from the norm.",
+      "Summary": "The Explorer speaks in an inspiring, adventurous tone, using language that evokes a sense of wanderlust. Their storytelling is exciting, filled with tales of adventure and discovery. They maintain a casual, free-spirited style, showing empathy for the yearning for new experiences."
+    }
+  },
+  {
+    "title": "Creator",
+    "description": "The Creator brand archetype is innovative and imaginative. They strive to create things of enduring value and integrity.",
+    "traits": ["Creative", "Visionary", "Inventive", "Authentic"],
+    "toneOfVoice": {
+      "Language": "Creative, visionary language that evokes a sense of possibility and invention.",
+      "Rhythm and Pace": "Measured pace, reflecting the thoughtful process of creation.",
+      "Humor": "Witty humor that reflects their creative and imaginative nature.",
+      "Formality": "A blend of professional and innovative, depending on the creative context.",
+      "Empathy": "Expresses understanding for the desire to innovate and create.",
+      "Storytelling": "Tells inspiring stories of creativity, innovation, and turning dreams into reality.",
+      "Summary": "The Creator speaks in a creative, visionary tone, using language that inspires possibility. Their storytelling is rich, painting pictures of creativity and innovation. Their style blends professionalism with a unique, imaginative perspective, showing understanding for the desire to create and innovate."
+    }
+  },
+  {
+    "title": "Ruler",
+    "description": "The Ruler brand archetype is authoritative and wants to create a prosperous and successful family, company, or community.",
+    "traits": [
+      "Authoritative",
+      "Leadership-oriented",
+      "Goal-driven",
+      "Responsible"
+    ],
+    "toneOfVoice": {
+      "Language": "Strong, decisive language that exudes authority and leadership.",
+      "Rhythm and Pace": "Steady pace that reflects their dependable and consistent nature.",
+      "Humor": "Humor that often ties in with leadership and achieving success.",
+      "Formality": "Formal and professional, reflecting their status and authority.",
+      "Empathy": "Expresses understanding for the desire for order, control, and success.",
+      "Storytelling": "Tells inspiring stories of leadership, achievement, and prosperity.",
+      "Summary": "The Ruler speaks in a strong, authoritative tone, using language that exudes leadership. Their storytelling revolves around themes of leadership and success. They maintain a formal, professional style, expressing understanding for the desire for order, control, and prosperity."
+    }
+  },
+  {
+    "title": "Magician",
+    "description": "The Magician brand archetype is transformative and wants to catalyze change. They aspire to turn dreams into reality.",
+    "traits": ["Inspirational", "Transformative", "Visionary", "Imaginative"],
+    "toneOfVoice": {
+      "Language": "Inspiring, transformative language that encourages belief in the impossible.",
+      "Rhythm and Pace": "Varied pace, capturing the magical and unpredictable nature of transformation.",
+      "Humor": "Clever, imaginative humor that plays on the theme of transformation.",
+      "Formality": "Blend of mystical and professional, reflecting their transformative nature.",
+      "Empathy": "Expresses understanding for the desire for change and transformation.",
+      "Storytelling": "Tells magical stories of transformation, turning dreams into reality.",
+      "Summary": "The Magician speaks in an inspiring, transformative tone, using language that encourages belief in the impossible. Their storytelling is magical, filled with stories of transformation. They maintain a blend of mystical and professional style, showing empathy for the desire for change and transformation."
+    }
+  },
+  {
+    "title": "Lover",
+    "description": "The Lover brand archetype is passionate and appreciates beauty. They aim to create relationships with people and experiences that people love.",
+    "traits": ["Passionate", "Inspiring", "Emotional", "Committed"],
+    "toneOfVoice": {
+      "Language": "Passionate, emotive language that evokes feelings of love and desire.",
+      "Rhythm and Pace": "Smooth, flowing pace that reflects their passionate and emotional nature.",
+      "Humor": "Warm, charming humor that ties in with love and connection.",
+      "Formality": "Casual, intimate style that encourages close relationships.",
+      "Empathy": "Expresses a deep understanding for the longing for love and connection.",
+      "Storytelling": "Tells emotive stories of love, passion, and deep connections.",
+      "Summary": "The Lover speaks in a passionate, emotive tone, using language that evokes feelings of love. Their storytelling is rich and emotional, painting pictures of love and connection. They maintain a casual, intimate style, showing a deep understanding for the longing for love and connection."
+    }
+  },
+  {
+    "title": "Caregiver",
+    "description": "The Caregiver brand archetype is nurturing and desires to protect. They are generous, selfless, and want to help others.",
+    "traits": ["Nurturing", "Protective", "Generous", "Altruistic"],
+    "toneOfVoice": {
+      "Language": "Compassionate, nurturing language that conveys a sense of care and protection.",
+      "Rhythm and Pace": "Slow, soothing pace that reflects their nurturing and caring nature.",
+      "Humor": "Warm, compassionate humor that connects on a human, emotional level.",
+      "Formality": "Friendly, approachable style that encourages trust and connection.",
+      "Empathy": "Expresses a deep understanding for the need for care, protection, and help.",
+      "Storytelling": "Tells heartfelt stories of care, protection, and selfless help.",
+      "Summary": "The Caregiver speaks in a compassionate, nurturing tone, using language that conveys care and protection. Their storytelling is heartfelt, revolving around themes of care and selfless help. They maintain a friendly, approachable style, expressing a deep understanding for the need for care and protection."
+    }
+  },
+  {
+    "title": "Jester",
+    "description": "The Jester brand archetype is entertaining and enjoys life. They desire to bring joy to the world and make people laugh.",
+    "traits": ["Humorous", "Joyful", "Entertaining", "Light-hearted"],
+    "toneOfVoice": {
+      "Language": "Witty, playful language that encourages laughter and joy.",
+      "Rhythm and Pace": "Fast-paced and energetic, reflecting their fun-loving nature.",
+      "Humor": "Humor is central, often clever, playful and always aiming to entertain.",
+      "Formality": "Casual, informal style that encourages laughter and playfulness.",
+      "Empathy": "Expresses understanding for the need for joy, laughter, and entertainment.",
+      "Storytelling": "Tells humorous, entertaining stories that make people laugh.",
+      "Summary": "The Jester speaks in a witty, playful tone, using language that encourages laughter. Their storytelling is humorous and entertaining, with a fast-paced, energetic style. They maintain a casual, informal style, expressing understanding for the need for joy, laughter, and entertainment."
+    }
+  },
+  {
+    "title": "Sage",
+    "description": "The Sage brand archetype seeks knowledge and wants to understand the world. They value wisdom, insight, and information.",
+    "traits": ["Wisdom", "Insightful", "Knowledgeable", "Professional"],
+    "toneOfVoice": {
+      "Language": "Intellectual, insightful language that conveys wisdom and knowledge.",
+      "Rhythm and Pace": "Measured, thoughtful pace that reflects their intellectual nature.",
+      "Humor": "Subtle, intellectual humor that plays on words and ideas.",
+      "Formality": "Formal, intellectual style that commands respect and credibility.",
+      "Empathy": "Expresses understanding for the thirst for knowledge and the pursuit of truth.",
+      "Storytelling": "Tells insightful stories that convey wisdom and provoke thought.",
+      "Summary": "The Sage speaks in an intellectual, insightful tone, using language that conveys wisdom. Their storytelling is thought-provoking, with a measured, thoughtful pace. They maintain a formal, intellectual style, expressing understanding for the thirst for knowledge and the pursuit of truth."
+    }
+  }
 ]

@@ -1,9 +1,12 @@
-import { AnonymousMessage, BrandProperty } from '../../../../lib/types'
+import {
+  AnonymousMessage,
+  ApiResponse,
+  BrandProperty
+} from '../../../../lib/types'
 import { Configuration, OpenAIApi } from 'openai-edge'
 import goldenCircleExample from '@/lib/json-examples/golden-circle.json'
 import { auth } from '@/auth'
 import { getBrand } from '@/app/actions'
-import { NextApiResponse } from 'next'
 import { NextResponse } from 'next/server'
 
 export const runtime = 'edge'
@@ -11,14 +14,6 @@ export const runtime = 'edge'
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY
 })
-
-type ApiResponse = {
-  choices: Array<{
-    message: {
-      content: string
-    }
-  }>
-}
 
 const openai = new OpenAIApi(configuration)
 
@@ -39,19 +34,20 @@ export async function POST(req: Request) {
   }
   const brand = await getBrand(userId)
   let prompt = `As a JSON API, you will receive a JSON object consisting of a set of questions and answers describing a brand. 
-        Using this information, your task is to generate a brand’s golden circle according to Simon Sinek’s framework, namely the 'Why?', 'How?', and 'What?'`
+        Using this information, your task is to generate a brand’s golden circle according to Simon Sinek’s framework, namely the 'Why?', 'How?', and 'What?' defined as follows:
+        Why: This is the core belief of the business. It's why the business exists. This should be the starting point of any strategy, as it's what inspires and motivates people within the organization and what appeals to customers on a deeper level.
+        How: This is how the business fulfills that core belief. It might be the unique selling proposition or the proprietary process of the company.
+        What: This is what the company does to fulfill that core belief. It's the products or services the company sells.`
   if (brand && brand.archetypeData) {
     prompt +=
-      'You will output three different responses formatted as a JSON array of objects. Each object will follow this structure:'
+      'You will output three different responses of no more than 250 charachters in length. The responses will be formatted as a JSON array of objects. Each object will follow this structure:'
     prompt += JSON.stringify(goldenCircleExample)
     prompt += `
-    Responses for all object will be litted to 250 charchters.
-    For the first object in the response, adopt a neutral, professional tone. 
-      For the second object, embody the tone and perspective of the Jungian archetype persona as defined by the following JSON:
+      For the first object in the response, adopt a neutral, professional tone. 
+      For the second object, adopt the tone of voice described by:
       `
-    prompt += JSON.stringify(brand.archetypeData)
+    prompt += brand.tone
     prompt += `
-      Please note that the archetype descriptions will guide the tone and perspective of your response.
         For the third object, adopt the persona and voice of Simon Sinek.
         Return only a JSON object structured as shown above.`
   }

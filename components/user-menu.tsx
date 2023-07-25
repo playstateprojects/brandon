@@ -12,7 +12,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
-import { IconExternalLink } from '@/components/ui/icons'
+import Link from 'next/link'
 
 export interface UserMenuProps {
   user: Session['user']
@@ -51,16 +51,16 @@ export function UserMenu({ user }: UserMenuProps) {
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem asChild>
-            <a
-              href="https://vercel.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-between w-full text-xs"
-            >
-              Vercel Homepage
-              <IconExternalLink className="w-3 h-3 ml-auto" />
-            </a>
+            <Link href="/manage" className="text-xs">
+              Manage Brand
+            </Link>
           </DropdownMenuItem>
+          <DropdownMenuItem asChild>
+            <Button variant="link" className="text-xs">
+              Delete Brand
+            </Button>
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
           <DropdownMenuItem
             onClick={() =>
               signOut({

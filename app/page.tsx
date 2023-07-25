@@ -2,6 +2,7 @@ import { auth } from '@/auth'
 import Image from 'next/image'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
+import { getBrand } from './actions'
 
 export const runtime = 'edge'
 
@@ -9,7 +10,12 @@ export default async function IndexPage() {
   const session = await auth()
 
   if (session?.user) {
-    redirect('/manage')
+    const brand = await getBrand(session.user.id)
+    if (brand.properties && brand.properties.length > 2) {
+      redirect('/guide')
+    } else {
+      redirect('/manage')
+    }
   }
   return (
     <>

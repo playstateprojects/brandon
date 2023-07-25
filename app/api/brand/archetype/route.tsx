@@ -3,6 +3,7 @@ import { AnonymousMessage, BrandProperty } from '../../../../lib/types'
 import { Configuration, OpenAIApi } from 'openai-edge'
 import { nanoid } from '@/lib/utils'
 import personaExample from '@/lib/json-examples/persona-example.json'
+import archtypes from '@/lib/archetypes.json'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { auth } from '@/auth'
 
@@ -29,10 +30,11 @@ export async function POST(req: Request) {
       status: 401
     })
   }
-  let prompt =
-    'you are a JSON API and will be sent a json object of questions and answer which describe a brand.'
-  prompt +=
-    'determin a provide a recomended jungian archetype that this brand could adopt that would express its values and differentiate it from its competitors.'
+  let prompt = `You are a JSON API and will be sent a json object of questions and answer which describe a brand.'
+    Recomended jungian archetypes that this brand could adopt that would express its values and differentiate it from its competitors.
+    use the following JSON as the definition for the archetypes from which you can choose.`
+  prompt += JSON.stringify(archtypes)
+
   prompt +=
     'you will respond with only a json object that follows the following format:'
   prompt += JSON.stringify(personaExample)

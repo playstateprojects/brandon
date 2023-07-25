@@ -1,25 +1,16 @@
 'use client'
 
 import * as React from 'react'
-import { Brand } from '@/lib/types'
-import { BrandResults } from './BrandResults'
+import { ArchetypeData, Brand } from '@/lib/types'
 import { saveBrand } from '@/app/actions'
 import { BrandForm } from './brand-form'
+import { useRouter } from 'next/navigation'
 
 type BrandManagerProps = {
   brand: Brand
 }
 export function BrandManager({ brand }: BrandManagerProps) {
-  const [formSubmitted, setFormSubmitted] = React.useState(false)
-  if (!brand) {
-    brand = {
-      id: '1',
-      userId: '1',
-      createdAt: new Date()
-    }
-  }
-  const [userBrand, setUserBrand] = React.useState<Brand>(brand)
-
+  const router = useRouter()
   const formSubmitHandler = async (brand: Brand) => {
     if (brand.properties) {
       fetch('/api/brand/archetype', {
@@ -31,41 +22,40 @@ export function BrandManager({ brand }: BrandManagerProps) {
       })
         .then(response => response.json())
         .then(async data => {
-          console.log('data r', data)
           if (
             data.choices &&
             data.choices[0] &&
             data.choices[0].message &&
             data.choices[0].message.content
           ) {
-            const content = JSON.parse(data.choices[0].message.content)
+            const content = JSON.parse(
+              data.choices[0].message.content
+            ) as ArchetypeData
+            console.log('tone', content.archetypes[0].tone)
+            console.log('tone', content)
+            await saveBrand(
+              {
+                ...brand,
+                archetypeData: content,
+                tone: content.archetypes[0].tone
+              },
+              brand.userId
+            )
 
-            setUserBrand(prevValue => {
-              return { ...prevValue, archetypeData: content }
-            })
-            await saveBrand({ ...brand, archetypeData: content }, brand.userId)
+            router.push('/guide')
           } else {
             alert('something went wrong!')
           }
         })
     }
 
-    await saveBrand(brand, brand.userId)
-
-    setFormSubmitted(true)
+    // await saveBrand(brand, brand.userId)
+    // router.push('/guide')
   }
 
   return (
     <>
-      {brand &&
-        (formSubmitted ? (
-          <BrandResults brand={userBrand}></BrandResults>
-        ) : (
-          <BrandForm
-            userBrand={brand}
-            onFormSubmit={formSubmitHandler}
-          ></BrandForm>
-        ))}
+      <BrandForm userBrand={brand} onFormSubmit={formSubmitHandler}></BrandForm>
     </>
   )
 }

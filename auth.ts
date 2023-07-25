@@ -1,6 +1,7 @@
 import NextAuth, { type DefaultSession } from 'next-auth'
 import GitHub from 'next-auth/providers/github'
 import Discord from 'next-auth/providers/discord'
+import Google from 'next-auth/providers/google'
 
 declare module 'next-auth' {
   interface Session {

@@ -17,24 +17,22 @@ export async function Header() {
     <header className="sticky top-0 z-50 flex items-center justify-between w-full h-16 px-4 border-b shrink-0 bg-gradient-to-b from-background/10 via-background/50 to-background/80 backdrop-blur-xl">
       <div className="flex items-center w-full">
         <div className="items-center flex">
-          {
-            // session?.user && (
-            // <div className="mr-4">
-            //   <Sidebar>
-            //     <React.Suspense
-            //       fallback={<div className="flex-1 overflow-auto" />}
-            //     >
-            //       {/* @ts-ignore */}
-            //       <SidebarList userId={session?.user?.id} />
-            //     </React.Suspense>
-            //     <SidebarFooter>
-            //       <ThemeToggle />
-            //       <ClearHistory clearChats={clearChats} />
-            //     </SidebarFooter>
-            //   </Sidebar>
-            // </div>
-            // )
-          }
+          {session?.user && (
+            <div className="mr-4">
+              <Sidebar>
+                <React.Suspense
+                  fallback={<div className="flex-1 overflow-auto" />}
+                >
+                  {/* @ts-ignore */}
+                  <SidebarList userId={session?.user?.id} />
+                </React.Suspense>
+                <SidebarFooter>
+                  <ThemeToggle />
+                  <ClearHistory clearChats={clearChats} />
+                </SidebarFooter>
+              </Sidebar>
+            </div>
+          )}
           <Link href="/" rel="nofollow" style={{ width: '200px' }}>
             <IconBrandon className="w-6 h-6 mr-2 dark:hidden" inverted />
           </Link>
@@ -45,7 +43,7 @@ export async function Header() {
               href="/chat"
               className="hover:text-black bg-transparent border-2 border-[#E6FE52] rounded-full py-1 px-4 hover:bg-[#E6FE52] "
             >
-              Ask Brand
+              Chat to Brand
             </Link>
 
             <Link
@@ -56,6 +54,7 @@ export async function Header() {
             </Link>
           </div>
         )}
+        <UserMenu user={session.user} />
       </div>
     </header>
   )

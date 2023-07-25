@@ -10,7 +10,8 @@ import {
   Brand,
   BrandProperty,
   GoldenCircle,
-  type Chat
+  type Chat,
+  ToneOfVoice
 } from '@/lib/types'
 import { nanoid } from 'nanoid'
 
@@ -127,14 +128,18 @@ export async function shareChat(chat: Chat) {
 }
 let isSavingBrand = false
 export async function saveBrand(brand: Brand, userId: string): Promise<void> {
-  if (isSavingBrand) return
+  console.log('herererer', brand)
+  if (isSavingBrand) {
+    console.log('saving.....')
+    return
+  }
   try {
     isSavingBrand = true
     const payload = {
       ...brand,
       userId
     }
-    await kv.hmset(`brand:${userId}`, payload)
+    let res = await kv.hmset(`brand:${userId}`, payload)
   } catch (error) {
     throw new Error('Failed to save brand')
   } finally {
@@ -154,7 +159,8 @@ export async function getBrand(userId: string): Promise<Brand> {
         properties: brandData.properties as BrandProperty[],
         archetypeData: brandData.archetypeData as ArchetypeData,
         goldenCircle: brandData.goldenCircle as GoldenCircle,
-        userId
+        tone: brandData.tone as ToneOfVoice,
+        userId: userId as string
       }
       return brand
     }
@@ -175,23 +181,5 @@ export async function getBrand(userId: string): Promise<Brand> {
     }
     return newBrand
     // throw new Error('Failed to retrieve brand')
-  }
-}
-
-export async function getGoldenCircle(brand: Brand) {
-  const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL
-  const res = await fetch(`${serverUrl}/api/brand/golden-circle`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(brand.properties)
-  })
-  console.log(res)
-  try {
-    return res.json()
-  } catch (error) {
-    console.error(error)
-    return []
   }
 }

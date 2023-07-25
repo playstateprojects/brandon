@@ -3,27 +3,20 @@
     {
       "title": "Ruler",
       "weight": 0.92,
-      "explanation": "IBM has long been a leading authority in the tech industry."
+      "explanation": "IBM has long been a leading authority in the tech industry.",
+      "tone": "IBM speaks in a strong, authoritative tone, using language that exudes leadership. Their storytelling revolves around themes of leadership and success. They maintain a formal, professional style, expressing understanding for the desire for order, control, and prosperity."
     },
     {
       "title": "Creator",
-      "weight": 0.87,
-      "explanation": "IBM has a history of innovation and creating new technology."
+      "weight": 0.6,
+      "explanation": "IBM has a history of innovation and creating new technology.",
+      "tone": "IBM speaks in a creative, visionary tone, using language that inspires possibility. Their storytelling is rich, painting pictures of creativity and innovation. Their style blends professionalism with a unique, imaginative perspective, showing understanding for the desire to create and innovate."
     },
     {
       "title": "Sage",
-      "weight": 0.83,
-      "explanation": "IBM's role as a source of wisdom and knowledge in the field of technology is well-known."
-    },
-    {
-      "title": "Magician",
-      "weight": 0.78,
-      "explanation": "IBM's ability to create innovative solutions gives it a 'Magician' quality."
-    },
-    {
-      "title": "Hero",
-      "weight": 0.74,
-      "explanation": "As a resilient player in the tech industry, IBM embodies some elements of the 'Hero' archetype."
+      "weight": 0.3,
+      "explanation": "IBM's role as a source of wisdom and knowledge in the field of technology is well-known.",
+      "tone": "IBM speaks in an intellectual, insightful tone, using language that conveys wisdom. Their storytelling is thought-provoking, with a measured, thoughtful pace. They maintain a formal, intellectual style, expressing understanding for the thirst for knowledge and the pursuit of truth."
     }
   ],
   "traits": [

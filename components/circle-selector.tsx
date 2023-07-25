@@ -18,7 +18,12 @@ export function CircleSelector({
   const [options, setOptions] = React.useState(initialOptions)
   const [currentIndex, setCurrentIndex] = React.useState(index)
   const textareaRef = React.useRef(null)
-  const [isLoading, setIsLoading] = React.useState(false)
+  React.useEffect(() => {
+    setOptions([...initialOptions])
+  }, [initialOptions])
+  React.useEffect(() => {
+    setCurrentIndex(index)
+  }, [index])
   const handleTextChange = (
     event: React.ChangeEvent<HTMLTextAreaElement>,
     index: number
@@ -56,10 +61,15 @@ export function CircleSelector({
         </h2>
         <textarea
           ref={textareaRef}
-          className="resize-none bg-transparent border-0 focus:border-blue-500 rounded p-2 w-full xl:h-[200px] md:h-[150px] sm:h-[200px] xs:h-[300px]"
+          className="resize-auto border border-custom-green border-opacity-20 bg-gradient-to-r from-background to-muted p-4  border-1 focus:border-black-100 rounded p-2 w-full xl:h-[200px] md:h-[150px] sm:h-[200px] xs:h-[300px]"
           value={options[currentIndex]}
           onChange={event => handleTextChange(event, currentIndex)}
         ></textarea>
+        <div className="flex justify-end my-4">
+          <p className="text-xs text-white txt">
+            {options[currentIndex].length}
+          </p>
+        </div>
         <div className="flex justify-end">
           <Button onClick={() => saveFunction(options[currentIndex])}>
             Save
