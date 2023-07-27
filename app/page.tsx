@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { getBrand } from './actions'
+import img from '../public/Intro-text-no-loop-open-sans.gif'
 
 export const runtime = 'edge'
 
@@ -23,7 +24,7 @@ export default async function IndexPage() {
         <div className="w-4/5 max-w-xl">
           <Image
             className="mx-auto"
-            src="/intro.gif"
+            src={img}
             alt="Animated GIF"
             width={600}
             height={400}
