@@ -29,7 +29,7 @@ export default async function CreatePage() {
     <div className="mx-auto max-w-6xl px-4">
       <div className="mt-8">
         <h1 className="mb-2 text-lg font-semibold">
-          Let's get to know each other!
+          Let&#39;s get to know each other!
         </h1>
         <p>
           Please answer a couple of questions about your brand so I can tailor
