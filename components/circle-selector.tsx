@@ -36,7 +36,7 @@ export function CircleSelector({
   return (
     <>
       <section>
-        <h2 className="text-4xl font-bold mb-4 flex items-center justify-center">
+        <h2 className="mb-4 flex items-center justify-center text-4xl font-bold">
           <Button
             variant="ghost"
             size="icon"
@@ -61,12 +61,12 @@ export function CircleSelector({
         </h2>
         <textarea
           ref={textareaRef}
-          className="resize-auto border border-custom-green border-opacity-20 bg-gradient-to-r from-background to-muted p-4  border-1 focus:border-black-100 rounded p-2 w-full xl:h-[200px] md:h-[150px] sm:h-[200px] xs:h-[300px]"
+          className="resize-auto border-1 focus:border-black-100 xs:h-[300px] border-opacity/20 w-full rounded border  border-custom-green bg-gradient-to-r from-background to-muted p-2 sm:h-[200px] md:h-[150px] xl:h-[200px]"
           value={options[currentIndex]}
           onChange={event => handleTextChange(event, currentIndex)}
         ></textarea>
-        <div className="flex justify-end my-4">
-          <p className="text-xs text-white txt">
+        <div className="my-4 flex justify-end">
+          <p className="txt text-xs text-white">
             {options[currentIndex].length}
           </p>
         </div>

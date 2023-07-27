@@ -39,7 +39,7 @@ export function UserMenu({ user }: UserMenuProps) {
               //   alt={user.name ?? 'Avatar'}
               // />
             ) : ( */}
-            <div className="flex items-center justify-center text-xs font-medium uppercase rounded-full select-none h-7 w-7 shrink-0 bg-muted/50 text-muted-foreground">
+            <div className="flex h-7 w-7 shrink-0 select-none items-center justify-center rounded-full bg-muted/50 text-xs font-medium uppercase text-muted-foreground">
               {user?.name ? getUserInitials(user?.name) : null}
             </div>
             {/* )} */}

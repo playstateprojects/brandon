@@ -8,7 +8,7 @@ export interface CenteredDivProps {
 export function CenteredDiv({children}:CenteredDivProps) {
   return (
     // <div className="flex justify-center items-center min-h-screen">
-    <div className="flex justify-center items-center mt-4">
+    <div className="mt-4 flex items-center justify-center">
     {children}
   </div>
     )

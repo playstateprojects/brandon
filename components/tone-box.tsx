@@ -42,7 +42,7 @@ export function ToneBox({ brand }: toneBoxProps) {
     setIsLoading(false)
   }
   return (
-    <div className="mx-auto max-w-2xl px-4 w-full mt-12 mb-12">
+    <div className="mx-auto my-12 w-full max-w-2xl px-4">
       <h1 className="text-2xl font-bold">Tone</h1>
       <p className="my-2">{userBrand.tone?.summary}</p>
       <div>

@@ -14,9 +14,9 @@ import { UserMenu } from '@/components/user-menu'
 export async function Header() {
   const session = await auth()
   return (
-    <header className="sticky top-0 z-50 flex items-center justify-between w-full h-16 px-4 border-b shrink-0 bg-gradient-to-b from-background/10 via-background/50 to-background/80 backdrop-blur-xl">
-      <div className="flex items-center w-full">
-        <div className="items-center flex">
+    <header className="sticky top-0 z-50 flex h-16 w-full shrink-0 items-center justify-between border-b bg-gradient-to-b from-background/10 via-background/50 to-background/80 px-4 backdrop-blur-xl">
+      <div className="flex w-full items-center">
+        <div className="flex items-center">
           {session?.user && (
             <div className="mr-4">
               <Sidebar>
@@ -34,21 +34,21 @@ export async function Header() {
             </div>
           )}
           <Link href="/" rel="nofollow" style={{ width: '200px' }}>
-            <IconBrandon className="w-6 h-6 mr-2 dark:hidden" inverted />
+            <IconBrandon className="mr-2 h-6 w-6 dark:hidden" inverted />
           </Link>
         </div>
         {session?.user && (
-          <div className="flex items-center justify-center space-x-4 w-full">
+          <div className="flex w-full items-center justify-center space-x-4">
             <Link
               href="/chat"
-              className="hover:text-black bg-transparent border-2 border-[#E6FE52] rounded-full py-1 px-4 hover:bg-[#E6FE52] "
+              className="rounded-full border-2 border-[#E6FE52] bg-transparent px-4 py-1 hover:bg-[#E6FE52] hover:text-black "
             >
               Chat to Brand
             </Link>
 
             <Link
               href="/guide"
-              className="hover:text-black bg-transparent border-2 border-[#E6FE52] rounded-full py-1 px-4 hover:bg-[#E6FE52] "
+              className="rounded-full border-2 border-[#E6FE52] bg-transparent px-4 py-1 hover:bg-[#E6FE52] hover:text-black "
             >
               Brand Guide
             </Link>

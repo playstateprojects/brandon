@@ -19,7 +19,7 @@ export default async function IndexPage() {
   }
   return (
     <>
-      <div className="flex flex-col items-center justify-center min-h-screen-100 bg-[#E6FE52]">
+      <div className="flex min-h-screen-100 flex-col items-center justify-center bg-[#E6FE52]">
         <div className="w-4/5 max-w-xl">
           <Image
             className="mx-auto"
@@ -33,7 +33,7 @@ export default async function IndexPage() {
         <div className="mt-4">
           <Link
             href="/sign-in"
-            className="hover:text-black text-black bg-transparent border-2 border-[#000] rounded-full py-1 px-4 hover:bg-[#E6FE52] "
+            className="rounded-full border-2 border-[#000] bg-transparent px-4 py-1 text-black hover:bg-[#E6FE52] hover:text-black "
           >
             Get started
           </Link>

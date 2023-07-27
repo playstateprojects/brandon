@@ -14,9 +14,9 @@ export function BrandArchetype({ archetypeData }: BrandArchetypeProps) {
     <>
       {archetypeData ? (
         <>
-          <section className="max-w-md mx-auto">
+          <section className="mx-auto max-w-md">
             <div>
-              <h2 className="text-4xl font-bold mb-4">Brand persona</h2>
+              <h2 className="mb-4 text-4xl font-bold">Brand persona</h2>
 
               {archetypeData.archetypes.map((archetype, index) => (
                 <React.Fragment key={index}>

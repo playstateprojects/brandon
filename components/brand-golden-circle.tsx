@@ -63,7 +63,7 @@ export function BrandGoldenCircle({ brand }: BrandGoldenCirclesProps) {
     saveBrand(newBrand, brand.userId)
   }
   return (
-    <div className="mx-auto max-w-2xl px-4 w-full mt-12 mb-12">
+    <div className="mx-auto my-12 w-full max-w-2xl px-4">
       {circle.length > 0 && (
         <div className="w-full">
           <CircleSelector
@@ -86,12 +86,12 @@ export function BrandGoldenCircle({ brand }: BrandGoldenCirclesProps) {
           />
         </div>
       )}
-      <div className="w-full flex justify-center items-center">
+      <div className="flex w-full items-center justify-center">
         <Button
           type="button"
           variant="outline"
           onClick={fetchCircle}
-          className="hover:text-black bg-transparent border-2 border-[#E6FE52] rounded-full py-1 px-4 hover:bg-[#E6FE52] "
+          className="rounded-full border-2 border-[#E6FE52] bg-transparent px-4 py-1 hover:bg-[#E6FE52] hover:text-black "
         >
           {isLoading ? (
             <LoaderIcon></LoaderIcon>

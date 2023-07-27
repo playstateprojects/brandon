@@ -101,8 +101,6 @@ export function BrandForm({ onFormSubmit, userBrand }: BrandQuestionsProps) {
   const nextQuestion = React.useCallback(() => {
     if (currentQuestion < questions.length - 1) {
       setCurrentQuestion(prev => prev + 1)
-    } else {
-      handleSubmit()
     }
   }, [currentQuestion])
   const prevQuestion = () => {
@@ -144,7 +142,7 @@ export function BrandForm({ onFormSubmit, userBrand }: BrandQuestionsProps) {
     }
   }, [currentQuestion])
   return (
-    <form onSubmit={handleSubmit} className="max-w-sm mx-auto">
+    <form onSubmit={handleSubmit} className="mx-auto max-w-sm">
       {questions.map((question, index) => (
         <div
           key={index}
@@ -154,7 +152,7 @@ export function BrandForm({ onFormSubmit, userBrand }: BrandQuestionsProps) {
             <TooltipTrigger asChild>
               <label
                 htmlFor={`question-${index + 1}`}
-                className="block font-semibold mb-1"
+                className="mb-1 block font-semibold"
               >
                 {currentQuestion + 1}/{questions.length} {question.question}
               </label>
@@ -167,30 +165,30 @@ export function BrandForm({ onFormSubmit, userBrand }: BrandQuestionsProps) {
             value={answers[index]}
             onChange={event => handleTextChange(event, index)}
             onKeyDown={event => handleKeyDown(event)}
-            className="w-full border rounded p-2 mt-4"
+            className="mt-4 w-full rounded border p-2"
           />
         </div>
       ))}
-      <div className="flex items-center justify-between w-full mt-8">
+      <div className="mt-8 flex w-full items-center justify-between">
         <Button
           type="button"
           variant="outline"
           onClick={prevQuestion}
-          className="hover:text-black bg-transparent border-2 border-[#E6FE52] rounded-full py-1 px-4 hover:bg-[#E6FE52] "
+          className="rounded-full border-2 border-[#E6FE52] bg-transparent px-4 py-1 hover:bg-[#E6FE52] hover:text-black "
         >
           previous
         </Button>
-        {/* <Button
+        <Button
           variant="outline"
-          className="hover:text-black bg-transparent border-2 border-[#E6FE52] rounded-full py-1 px-4 hover:bg-[#E6FE52] "
+          className="rounded-full border-2 border-[#E6FE52] bg-transparent px-4 py-1 hover:bg-[#E6FE52] hover:text-black "
         >
           done
-        </Button> */}
+        </Button>
         <Button
           type="button"
           variant="outline"
           onClick={nextQuestion}
-          className="hover:text-black bg-transparent border-2 border-[#E6FE52] rounded-full py-1 px-4 hover:bg-[#E6FE52] "
+          className="rounded-full border-2 border-[#E6FE52] bg-transparent px-4 py-1 hover:bg-[#E6FE52] hover:text-black "
         >
           next
         </Button>
