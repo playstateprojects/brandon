@@ -54,7 +54,7 @@ export async function Header() {
             </Link>
           </div>
         )}
-        <UserMenu user={session.user} />
+        {session && session.user && <UserMenu user={session.user} />}
       </div>
     </header>
   )
