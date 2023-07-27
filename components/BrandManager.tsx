@@ -36,8 +36,7 @@ export function BrandManager({ brand }: BrandManagerProps) {
             await saveBrand(
               {
                 ...brand,
-                archetypeData: content,
-                tone: content.archetypes[0].tone
+                archetypeData: content
               },
               brand.userId
             )
