@@ -17,22 +17,6 @@ export async function Header() {
     <header className="sticky top-0 z-50 flex h-16 w-full shrink-0 items-center justify-between border-b bg-gradient-to-b from-background/10 via-background/50 to-background/80 px-4 backdrop-blur-xl">
       <div className="flex w-full items-center">
         <div className="flex items-center">
-          {session?.user && (
-            <div className="mr-4">
-              <Sidebar>
-                <React.Suspense
-                  fallback={<div className="flex-1 overflow-auto" />}
-                >
-                  {/* @ts-ignore */}
-                  <SidebarList userId={session?.user?.id} />
-                </React.Suspense>
-                <SidebarFooter>
-                  <ThemeToggle />
-                  <ClearHistory clearChats={clearChats} />
-                </SidebarFooter>
-              </Sidebar>
-            </div>
-          )}
           <Link href="/" rel="nofollow" style={{ width: '200px' }}>
             <IconBrandon className="mr-2 h-6 w-6 dark:hidden" inverted />
           </Link>

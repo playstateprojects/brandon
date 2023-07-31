@@ -101,6 +101,8 @@ export function BrandForm({ onFormSubmit, userBrand }: BrandQuestionsProps) {
   const nextQuestion = React.useCallback(() => {
     if (currentQuestion < questions.length - 1) {
       setCurrentQuestion(prev => prev + 1)
+    } else {
+      handleSubmit()
     }
   }, [currentQuestion])
   const prevQuestion = () => {
@@ -179,11 +181,14 @@ export function BrandForm({ onFormSubmit, userBrand }: BrandQuestionsProps) {
           previous
         </Button>
         <Button
+          type="button"
           variant="outline"
+          onClick={handleSubmit}
           className="rounded-full border-2 border-[#E6FE52] bg-transparent px-4 py-1 hover:bg-[#E6FE52] hover:text-black "
         >
           done
         </Button>
+
         <Button
           type="button"
           variant="outline"

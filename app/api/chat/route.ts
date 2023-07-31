@@ -25,18 +25,50 @@ export async function POST(req: Request) {
       status: 401
     })
   }
-  const persona = await getBrand(userId)
-  console.log(' got p')
-  if (persona) {
-    console.log('persona', persona)
-    let systemMessage: AnonymousMessage = {
+  const brand = await getBrand(userId)
+  console.log('go')
+  if (brand) {
+    console.log('persona', brand)
+    const systemMessage: AnonymousMessage = {
       content:
-        'You should adopt the persona of a brand. The brands Jungian persona is defined ny the following JSON' +
-        persona +
-        ' Adopt this persona when you answer any questions in this chat.',
+        'You should adopt the persona of a brand. The brand can be described by the following JSON' +
+        brand +
+        'all your responses should take the brand information into account and text should be generated in accordance of this brands identity and best interest',
       role: 'system'
     }
     messages.push(systemMessage)
+    if (brand.goldenCircle) {
+      const whyMessageQuestion: AnonymousMessage = {
+        content: 'What is the core belief and guiding principle of the brand',
+        role: 'user'
+      }
+      messages.push(whyMessageQuestion)
+      const whyMessageAnswer: AnonymousMessage = {
+        content: brand.goldenCircle.why,
+        role: 'assistant'
+      }
+      messages.push(whyMessageAnswer)
+      const whatMessageQuestion: AnonymousMessage = {
+        content: 'What does Brandon do or sell?',
+        role: 'user'
+      }
+      messages.push(whatMessageQuestion)
+      const whatMessageAnswer: AnonymousMessage = {
+        content: brand.goldenCircle.what,
+        role: 'assistant'
+      }
+      messages.push(whatMessageAnswer)
+      const howMessageQuestion: AnonymousMessage = {
+        content: 'How does Brandon deliver value?',
+        role: 'user'
+      }
+      messages.push(whatMessageQuestion)
+      const howMessageAnswer: AnonymousMessage = {
+        content: brand.goldenCircle.how,
+        role: 'assistant'
+      }
+      messages.push(howMessageAnswer)
+    }
   }
   if (previewToken) {
     configuration.apiKey = previewToken
@@ -45,7 +77,7 @@ export async function POST(req: Request) {
   const res = await openai.createChatCompletion({
     model: 'gpt-3.5-turbo',
     messages,
-    temperature: 0.7,
+    temperature: 0.6,
     stream: true
   })
 

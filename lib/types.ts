@@ -34,6 +34,7 @@ export interface Brand {
   archetypeData?: ArchetypeData
   goldenCircle?: GoldenCircle
   tone?: ToneOfVoice
+  story?: string
 }
 
 export type ServerActionResult<Result> = Promise<

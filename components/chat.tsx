@@ -50,6 +50,22 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
     })
   return (
     <>
+      {
+        // session?.user && (
+        // <div className="mr-4">
+        //   <Sidebar>
+        //     <React.Suspense fallback={<div className="flex-1 overflow-auto" />}>
+        //       {/* @ts-ignore */}
+        //       <SidebarList userId={session?.user?.id} />
+        //     </React.Suspense>
+        //     <SidebarFooter>
+        //       <ThemeToggle />
+        //       <ClearHistory clearChats={clearChats} />
+        //     </SidebarFooter>
+        //   </Sidebar>
+        // </div>
+        // )
+      }
       <div className={cn('pb-[200px] pt-4 md:pt-10', className)}>
         {messages.length ? (
           <>

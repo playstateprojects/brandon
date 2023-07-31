@@ -26,7 +26,7 @@ export default async function CreatePage() {
   }
   const userBrand = await getBrand(session.user.id)
   return (
-    <div className="mx-auto max-w-6xl px-4">
+    <div className="mx-auto max-w-2xl px-4">
       <div className="mt-8">
         <h1 className="mb-2 text-lg font-semibold">
           Let&#39;s get to know each other!
