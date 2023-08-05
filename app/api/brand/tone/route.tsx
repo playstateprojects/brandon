@@ -31,7 +31,7 @@ export async function POST(req: Request) {
     })
   }
   let prompt = `You are a JSON API and will be sent a json object representing the personality traits of a brand. 
-    You will describe a charachterful and engage tone of voice that represents the brand.The following list describes the aspects that will go into your description:
+    You will describe a charachterful and engaging tone of voice that represents the brand.The following list describes the aspects that will go into your description:
     Language: This is about the words you choose. A brand catering to a young audience might use trendy slang and emojis, while a brand aiming for a sophisticated audience might use more complex language and technical jargon. It's about speaking the language of your target audience.
 
     Rhythm and Pace: Just like a good conversation, good copy has a rhythm to it. Short sentences can make your copy feel fast-paced and energetic, while longer sentences can slow the pace down and create a more thoughtful or relaxed mood.
@@ -56,6 +56,7 @@ export async function POST(req: Request) {
     role: 'user'
   }
   const messages = [systemMessage, userMessage]
+  console.log(messages)
   const result = await openai.createChatCompletion({
     model: 'gpt-3.5-turbo',
     messages,

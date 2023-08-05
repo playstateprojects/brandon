@@ -67,7 +67,7 @@ export function CircleSelector({
         ></textarea>
         <div className="my-4 flex justify-end">
           <p className="txt text-xs text-white">
-            {options[currentIndex].length}
+            {options[currentIndex]?.length}
           </p>
         </div>
         <div className="flex justify-end">

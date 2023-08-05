@@ -9,6 +9,7 @@ import ArchetypePieChart from './archetype-pie-chart'
 import { BrandGoldenCircle } from './brand-golden-circle'
 import { BrandArchetype } from './brand-archetype'
 import { ToneBox } from './tone-box'
+import { StoryPanel } from './story-panel'
 
 type BrandManagerProps = {
   brand: Brand
@@ -20,6 +21,7 @@ export function BrandGuide({ brand }: BrandManagerProps) {
   }, [brand])
   return (
     <>
+      <StoryPanel brand={userBrand}></StoryPanel>
       <ToneBox brand={userBrand}></ToneBox>
       <BrandGoldenCircle brand={userBrand}></BrandGoldenCircle>
       {userBrand.archetypeData && (

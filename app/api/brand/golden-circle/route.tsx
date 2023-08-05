@@ -70,9 +70,7 @@ export async function POST(req: Request) {
   //TODO: cleanup the response and make sure we get the expected object returned, save the id etc.
   // Ensure result.json().choices and result.json().choices[0].message.content exist before returning
   const res = await result.json()
-  console.log(res)
   const jsonResult: ApiResponse = res
-  console.log(jsonResult)
   // Ensure jsonResult.choices and jsonResult.choices[0].message.content exist before returning
   if (
     jsonResult &&

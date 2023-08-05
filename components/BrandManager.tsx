@@ -31,8 +31,6 @@ export function BrandManager({ brand }: BrandManagerProps) {
             const content = JSON.parse(
               data.choices[0].message.content
             ) as ArchetypeData
-            console.log('tone', content.archetypes[0].tone)
-            console.log('tone', content)
             await saveBrand(
               {
                 ...brand,

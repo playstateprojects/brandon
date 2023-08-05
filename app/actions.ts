@@ -14,7 +14,25 @@ import {
   ToneOfVoice
 } from '@/lib/types'
 import { nanoid } from 'nanoid'
+import { Document } from 'langchain/document'
+import { OpenAIEmbeddings } from 'langchain/embeddings/openai'
+import { TokenTextSplitter } from 'langchain/text_splitter'
+import Bottleneck from 'bottleneck'
+import { PineconeClient, Vector } from '@pinecone-database/pinecone'
 
+let pinecone: PineconeClient | null = null
+
+const pineconeIndexName = process.env.PINECONE_INDEX_NAME!
+
+const initPineconeClient = async () => {
+  pinecone = new PineconeClient()
+  console.log('init pinecone')
+  await pinecone.init({
+    environment: process.env.PINECONE_ENVIRONMENT!,
+    apiKey: process.env.PINECONE_API_KEY!
+  })
+}
+initPineconeClient()
 export async function getChats(userId?: string | null) {
   if (!userId) {
     return []
@@ -128,7 +146,6 @@ export async function shareChat(chat: Chat) {
 }
 let isSavingBrand = false
 export async function saveBrand(brand: Brand, userId: string): Promise<void> {
-  console.log('herererer', brand)
   if (isSavingBrand) {
     console.log('saving.....')
     return
@@ -140,6 +157,7 @@ export async function saveBrand(brand: Brand, userId: string): Promise<void> {
       userId
     }
     let res = await kv.hmset(`brand:${userId}`, payload)
+    embedBrand(brand)
   } catch (error) {
     throw new Error('Failed to save brand')
   } finally {
@@ -182,4 +200,76 @@ export async function getBrand(userId: string): Promise<Brand> {
     return newBrand
     // throw new Error('Failed to retrieve brand')
   }
+}
+
+const sliceIntoChunks = (arr: Vector[], chunkSize: number) => {
+  return Array.from({ length: Math.ceil(arr.length / chunkSize) }, (_, i) =>
+    arr.slice(i * chunkSize, (i + 1) * chunkSize)
+  )
+}
+
+export async function embedBrand(brand: Brand) {
+  const brandDoc = new Document({
+    pageContent: JSON.stringify(brand),
+    metadata: { created: new Date(), name: 'brandon' }
+  })
+  const embedder = new OpenAIEmbeddings({
+    modelName: 'text-embedding-ada-002'
+  })
+  const splitter = new TokenTextSplitter({
+    encodingName: 'gpt2',
+    chunkSize: 300,
+    chunkOverlap: 20
+  })
+  const limiter = new Bottleneck({
+    minTime: 50
+  })
+
+  const docs = await splitter.splitDocuments([brandDoc])
+  console.log('------>', docs)
+  let counter = 0
+  const getEmbedding = async (doc: Document) => {
+    const embedding = await embedder.embedQuery(doc.pageContent)
+    console.log('got embedding', embedding.length)
+
+    counter = counter + 1
+    return {
+      id: nanoid(),
+      values: embedding,
+      metadata: {
+        chunk: doc.pageContent,
+        text: doc.metadata.text as string
+      }
+    }
+  }
+  const rateLimitedGetEmbedding = limiter.wrap(getEmbedding)
+  console.log('done embedding')
+
+  let vectors = [] as Vector[]
+  const index = pinecone && pinecone.Index(pineconeIndexName)
+  try {
+    vectors = (await Promise.all(
+      docs.flat().map(doc => rateLimitedGetEmbedding(doc))
+    )) as unknown as Vector[]
+    const chunks = sliceIntoChunks(vectors, 10)
+    console.log(chunks.length)
+
+    try {
+      await Promise.all(
+        chunks.map(async chunk => {
+          await index!.upsert({
+            upsertRequest: {
+              vectors: chunk as Vector[],
+              namespace: ''
+            }
+          })
+        })
+      )
+    } catch (e) {
+      console.log(e)
+    }
+  } catch (e) {
+    console.log(e)
+  }
+  // console.log(res)
 }

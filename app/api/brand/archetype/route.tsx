@@ -23,6 +23,7 @@ export async function POST(req: Request) {
       return { question: property.description, answer: property.value }
     })
   )
+  const author = await auth()
   const userId = (await auth())?.user.id
 
   if (!userId) {

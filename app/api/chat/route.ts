@@ -26,7 +26,6 @@ export async function POST(req: Request) {
     })
   }
   const brand = await getBrand(userId)
-  console.log('go')
   if (brand) {
     console.log('persona', brand)
     const systemMessage: AnonymousMessage = {
