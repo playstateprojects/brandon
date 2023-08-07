@@ -6,18 +6,40 @@ import { auth } from '@/auth'
 import { nanoid } from '@/lib/utils'
 import { getBrand } from '@/app/actions'
 import { AnonymousMessage } from '@/lib/types'
+import { PineconeClient } from '@pinecone-database/pinecone'
+import { LLMChain } from 'langchain/chains'
+import { OpenAI } from 'langchain/llms/openai'
+import { PromptTemplate } from 'langchain/prompts'
+import { templates } from '@/app/templates'
+import { OpenAIEmbeddings } from 'langchain/embeddings/openai'
+import { getMatchesFromEmbeddings } from '@/app/matches'
 
 export const runtime = 'edge'
+
+let pinecone: PineconeClient | null = null
+
+const initPineconeClient = async () => {
+  pinecone = new PineconeClient()
+  await pinecone.init({
+    environment: process.env.PINECONE_ENVIRONMENT!,
+    apiKey: process.env.PINECONE_API_KEY!
+  })
+}
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY
 })
-
+//TODO: do we need both?
 const openai = new OpenAIApi(configuration)
+const model = new OpenAI({ temperature: 0.7 })
 
 export async function POST(req: Request) {
+  if (!pinecone) {
+    await initPineconeClient()
+  }
   const json = await req.json()
   const { messages, previewToken } = json
+  const messagesArray = messages as AnonymousMessage[]
   const userId = (await auth())?.user.id
 
   if (!userId) {
@@ -26,53 +48,69 @@ export async function POST(req: Request) {
     })
   }
   const brand = await getBrand(userId)
-  if (brand) {
-    console.log('persona', brand)
+  const hasSystemMessage = messagesArray.find((msg: AnonymousMessage) => {
+    return msg.role == 'system'
+  })
+  console.log('hs', hasSystemMessage)
+  if (brand && !hasSystemMessage) {
+    // console.log('persona', brand)
     const systemMessage: AnonymousMessage = {
       content:
         'You should adopt the persona of a brand. The brand can be described by the following JSON' +
-        brand +
+        JSON.stringify(brand) +
         'all your responses should take the brand information into account and text should be generated in accordance of this brands identity and best interest',
       role: 'system'
     }
-    messages.push(systemMessage)
-    if (brand.goldenCircle) {
-      const whyMessageQuestion: AnonymousMessage = {
-        content: 'What is the core belief and guiding principle of the brand',
-        role: 'user'
-      }
-      messages.push(whyMessageQuestion)
-      const whyMessageAnswer: AnonymousMessage = {
-        content: brand.goldenCircle.why,
-        role: 'assistant'
-      }
-      messages.push(whyMessageAnswer)
-      const whatMessageQuestion: AnonymousMessage = {
-        content: 'What does Brandon do or sell?',
-        role: 'user'
-      }
-      messages.push(whatMessageQuestion)
-      const whatMessageAnswer: AnonymousMessage = {
-        content: brand.goldenCircle.what,
-        role: 'assistant'
-      }
-      messages.push(whatMessageAnswer)
-      const howMessageQuestion: AnonymousMessage = {
-        content: 'How does Brandon deliver value?',
-        role: 'user'
-      }
-      messages.push(whatMessageQuestion)
-      const howMessageAnswer: AnonymousMessage = {
-        content: brand.goldenCircle.how,
-        role: 'assistant'
-      }
-      messages.push(howMessageAnswer)
-    }
+    messages.unshift(systemMessage)
   }
+  //TODO:WHAT IS THE PREVIEW TOKEN?
+
   if (previewToken) {
+    console.log('previewToken', previewToken)
     configuration.apiKey = previewToken
   }
+  // Build an LLM chain that will improve the user prompt
+  const inquiryChain = new LLMChain({
+    llm: model,
+    prompt: new PromptTemplate({
+      template: templates.inquiryTemplate,
+      inputVariables: ['userPrompt', 'conversationHistory']
+    })
+  })
+  const inquiryChainResult = await inquiryChain.call({
+    userPrompt: messagesArray[messagesArray.length - 1].content,
+    conversationHistory: messagesArray.map(msg => {
+      return (
+        `speaker: ` +
+        msg.role +
+        `
+              ` +
+        msg.content
+      )
+    })
+  })
+  const inquiry = inquiryChainResult.text
 
+  console.log(inquiry)
+
+  // console.log(inquiry)
+
+  // // Embed the user's intent and query the Pinecone index
+  const embedder = new OpenAIEmbeddings({
+    modelName: 'text-embedding-ada-002'
+  })
+
+  const embeddings = await embedder.embedQuery(inquiry)
+  // channel.publish({
+  //   data: {
+  //     event: 'status',
+  //     message: 'Finding matches...'
+  //   }
+  // })
+
+  const matches = await getMatchesFromEmbeddings(embeddings, pinecone!, 2)
+  console.log('matches-----', matches)
+  //TODO: handle: This model's maximum context length is 4097 tokens. However, your messages resulted in 4112 tokens. Please reduce the length of the messages.
   const res = await openai.createChatCompletion({
     model: 'gpt-3.5-turbo',
     messages,

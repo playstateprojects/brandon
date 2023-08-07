@@ -35,7 +35,7 @@
     "class-variance-authority": "^0.4.0",
     "clsx": "^1.2.1",
     "focus-trap-react": "^10.2.1",
-    "langchain": "^0.0.122",
+    "langchain": "^0.0.124",
     "nanoid": "^4.0.2",
     "next": "13.4.12",
     "next-auth": "0.0.0-manual.83c4ebd1",

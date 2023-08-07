@@ -209,9 +209,10 @@ const sliceIntoChunks = (arr: Vector[], chunkSize: number) => {
 }
 
 export async function embedBrand(brand: Brand) {
+  const documentMeta = { type: 'brand', brandId: brand.id }
   const brandDoc = new Document({
     pageContent: JSON.stringify(brand),
-    metadata: { created: new Date(), name: 'brandon' }
+    metadata: documentMeta
   })
   const embedder = new OpenAIEmbeddings({
     modelName: 'text-embedding-ada-002'
@@ -226,7 +227,6 @@ export async function embedBrand(brand: Brand) {
   })
 
   const docs = await splitter.splitDocuments([brandDoc])
-  console.log('------>', docs)
   let counter = 0
   const getEmbedding = async (doc: Document) => {
     const embedding = await embedder.embedQuery(doc.pageContent)
@@ -237,23 +237,49 @@ export async function embedBrand(brand: Brand) {
       id: nanoid(),
       values: embedding,
       metadata: {
-        chunk: doc.pageContent,
-        text: doc.metadata.text as string
+        ...documentMeta,
+        page: counter,
+        chunk: doc.pageContent
       }
     }
   }
   const rateLimitedGetEmbedding = limiter.wrap(getEmbedding)
-  console.log('done embedding')
 
   let vectors = [] as Vector[]
   const index = pinecone && pinecone.Index(pineconeIndexName)
+
+  //this is for debugging only:
+  // let description = await index!.describeIndexStats({
+  //   describeIndexStatsRequest: {}
+  // })
+  // console.log('------', description)
+  //------------------------------------------
+  //TODO: this just gets the vectors to Delete in Production we should track vector ID's and manage them ellegantly
+  const brandVectors = await index!.query({
+    queryRequest: {
+      topK: 100,
+      vector: new Array(1536).fill(1),
+      includeMetadata: true,
+      filter: {
+        $and: [{ type: { $eq: 'brand' } }, { brandId: { $eq: brand.id } }]
+      }
+    }
+  })
+
+  const brandVectorIds = brandVectors.matches?.map(vector => vector.id)
+  if (brandVectorIds)
+    await index?._delete({ deleteRequest: { ids: brandVectorIds } })
+  //this is for debugging only:
+  // description = await index!.describeIndexStats({
+  //   describeIndexStatsRequest: {}
+  // })
+  // console.log('------', description)
   try {
+    //the vectors come back from openAI with an ID that is then used as the ID in PineCone keep track of them in theto save work and or delete them.
     vectors = (await Promise.all(
       docs.flat().map(doc => rateLimitedGetEmbedding(doc))
     )) as unknown as Vector[]
     const chunks = sliceIntoChunks(vectors, 10)
-    console.log(chunks.length)
-
     try {
       await Promise.all(
         chunks.map(async chunk => {
