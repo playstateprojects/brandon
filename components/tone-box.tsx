@@ -5,6 +5,7 @@ import { Brand, ToneOfVoice } from '@/lib/types'
 import { Button } from '@/components/ui/button'
 import { saveBrand } from '@/app/actions'
 import { LoaderIcon } from 'react-hot-toast'
+import { Panel, PanelText } from './ui/panel'
 
 type toneBoxProps = {
   brand: Brand
@@ -14,7 +15,6 @@ export function ToneBox({ brand }: toneBoxProps) {
   const [isLoading, setIsLoading] = React.useState(false)
   React.useEffect(() => {
     setUserBrand(brand)
-    console.log(brand)
   }, [brand])
   const fetchTone = async () => {
     setIsLoading(true)
@@ -42,9 +42,8 @@ export function ToneBox({ brand }: toneBoxProps) {
     setIsLoading(false)
   }
   return (
-    <div className="mx-auto my-12 w-full max-w-2xl px-4">
-      <h1 className="text-2xl font-bold">Tone</h1>
-      <p className="my-2">{userBrand.tone?.summary}</p>
+    <Panel title="Tone">
+      <PanelText text={userBrand.tone!.summary}></PanelText>
       <div>
         <Button onClick={fetchTone}>
           {isLoading && (
@@ -52,9 +51,9 @@ export function ToneBox({ brand }: toneBoxProps) {
               <LoaderIcon></LoaderIcon>&nbsp;
             </>
           )}
-          Genrate
+          Generate
         </Button>
       </div>
-    </div>
+    </Panel>
   )
 }

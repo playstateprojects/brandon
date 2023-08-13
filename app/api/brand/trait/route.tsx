@@ -1,15 +1,11 @@
-import { ChatOpenAI } from 'langchain/chat_models/openai'
 import { LLMChain } from 'langchain/chains'
 import { OpenAI } from 'langchain/llms/openai'
-
 import { PromptTemplate } from 'langchain/prompts'
-import { NextApiRequest, NextApiResponse } from 'next'
+import { CreatedBy } from '@/lib/types'
 import { auth } from '@/auth'
 import { NextResponse } from 'next/server'
-import { nanoid } from 'nanoid'
+import { getBrand, saveBrand } from '@/app/actions'
 import { templates } from '@/app/templates'
-import { BaseLanguageModel } from 'langchain/base_language'
-import { createBrandSumation, getBrand } from '@/app/actions'
 
 export const runtime = 'edge'
 
@@ -20,27 +16,34 @@ export const runtime = 'edge'
 // const openai = new OpenAIApi(configuration)
 
 export async function POST(req: Request) {
-  const json = await req.json()
   const userId = (await auth())?.user.id
-
   if (!userId) {
     return new Response('Unauthorized', {
       status: 401
     })
   }
+  const data: { prompt: string; response: string } = await req.json()
   const brand = await getBrand(userId)
   const llm = new OpenAI()
   const prompt = new PromptTemplate({
-    template: templates.storyTemplate,
-    inputVariables: ['brandDetails']
+    template: templates.traitTemplate,
+    inputVariables: ['givenPrompt', 'givenResponse']
   })
   const chain = new LLMChain({ llm, prompt })
-  const fullStory = createBrandSumation(brand)
   const response = await chain.call({
-    userPrompt: templates.storyTemplate,
-    brandDetails: fullStory
+    givenPrompt: data.prompt,
+    givenResponse: data.response
   })
-  return NextResponse.json(response, {
+  console.log('----response-----\n', response.text)
+
+  brand.properties!.push({
+    description: response.text,
+    value: data.response,
+    createdAt: new Date(),
+    createdBy: CreatedBy.User
+  })
+  await saveBrand(brand, userId)
+  return NextResponse.json(JSON.parse(response.text), {
     status: 200
   })
 }

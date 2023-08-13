@@ -5,9 +5,9 @@ import { Brand, GoldenCircle } from '@/lib/types'
 import { IconArrowLeft, IconSpinner } from './ui/icons'
 import { Button } from './ui/button'
 import { saveBrand } from '@/app/actions'
-import { CircleSelector } from './circle-selector'
 import { LoaderIcon } from 'react-hot-toast'
 import { LangChainStream } from 'ai'
+import { PanelText } from './ui/panel'
 type BrandGoldenCirclesProps = {
   brand: Brand
 }
@@ -48,7 +48,7 @@ export function BrandStory({ brand }: BrandGoldenCirclesProps) {
   return (
     <div className="mx-auto my-12 w-full max-w-2xl px-4">
       <h1>Story</h1>
-      <p>{story}</p>
+      {/* <PanelText content={story}></PanelText> */}
       <div className="flex w-full items-center justify-center">
         <Button
           type="button"

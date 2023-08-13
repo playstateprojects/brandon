@@ -36,6 +36,16 @@ export interface Brand {
   tone?: ToneOfVoice
   story?: string
 }
+export interface PersonalBrand {
+  id: string
+  createdAt: Date
+  userId: string
+  properties?: BrandProperty[]
+  archetypeData?: ArchetypeData
+  goldenCircle?: GoldenCircle
+  tone?: ToneOfVoice
+  story?: string
+}
 
 export type ServerActionResult<Result> = Promise<
   | Result

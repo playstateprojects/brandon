@@ -12,6 +12,7 @@ type BrandManagerProps = {
 export function BrandManager({ brand }: BrandManagerProps) {
   const router = useRouter()
   const formSubmitHandler = async (brand: Brand) => {
+    console.log('brand props--------------\n', brand.properties)
     if (brand.properties) {
       fetch('/api/brand/archetype', {
         method: 'POST',

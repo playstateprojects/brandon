@@ -3,18 +3,46 @@
 import * as React from 'react'
 import { Brand, ToneOfVoice } from '@/lib/types'
 import { Button } from '@/components/ui/button'
-import { saveBrand } from '@/app/actions'
 import { LoaderIcon } from 'react-hot-toast'
+import { Panel, PanelText } from './ui/panel'
 
 type StoryPanelProps = {
   brand: Brand
 }
+const createBrandSumation = (brand: Brand): string => {
+  let brandMD = ''
+  brand.properties?.forEach(brandProp => {
+    if (brandProp.description.toLowerCase() == 'what is your brand name?') {
+      brandMD = '# ' + brandProp.value + brandMD + '\n\n'
+    } else if (brandProp.value) {
+      brandMD +=
+        '### ' + brandProp.description + '\n\n' + brandProp.value + '\n\n'
+    }
+  })
+  if (brand.goldenCircle) {
+    brandMD += '# WHY \n\n**' + brand.goldenCircle.why + '**\n\n'
+    brandMD += '# WHAT \n\n**' + brand.goldenCircle.what + '**\n\n'
+    brandMD += '# HOW \n\n**' + brand.goldenCircle.how + '**\n\n'
+  }
+  if (brand.tone) {
+    brandMD += '## Tone of Voice \n\n' + brand.tone.summary + '\n\n'
+  }
+
+  return brandMD
+}
 export function StoryPanel({ brand }: StoryPanelProps) {
   const [userBrand, setUserBrand] = React.useState<Brand>(brand)
   const [isLoading, setIsLoading] = React.useState(false)
-  React.useEffect(() => {
-    setUserBrand(brand)
-  }, [brand])
+  const [brandStory, setBrandStory] = React.useState('')
+  // setBrandStory(createBrandSumation(brand))
+
+  // React.useEffect(() => {
+  //   setUserBrand(brand)
+  //   const summary = createBrandSumation(brand)
+  //   // if (!summary || typeof summary != 'string') return
+  //   setBrandStory(summary)
+  // }, [brand])
+
   const fetchStory = async () => {
     setIsLoading(true)
     const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL
@@ -32,6 +60,7 @@ export function StoryPanel({ brand }: StoryPanelProps) {
 
     // Convert the response body to JSON
     const json = await res.json()
+    setBrandStory(json.text)
     console.log('got story')
     // const story = JSON.parse(json)
     // const updatedBrand = { ...userBrand, tone: tone as ToneOfVoice }
@@ -42,19 +71,20 @@ export function StoryPanel({ brand }: StoryPanelProps) {
     setIsLoading(false)
   }
   return (
-    <div className="mx-auto my-12 w-full max-w-2xl px-4">
-      <h1 className="text-2xl font-bold">Tone</h1>
-      <p className="my-2">{userBrand.tone?.summary}</p>
-      <div>
-        <Button onClick={fetchStory}>
-          {isLoading && (
-            <>
-              <LoaderIcon></LoaderIcon>&nbsp;
-            </>
-          )}
-          Genrate Story
-        </Button>
-      </div>
-    </div>
+    <Panel title="Story">
+      {typeof brandStory === 'string' && (
+        <>
+          <PanelText text={brandStory}></PanelText>
+        </>
+      )}
+      <Button onClick={fetchStory}>
+        {isLoading && (
+          <>
+            <LoaderIcon></LoaderIcon>&nbsp;
+          </>
+        )}
+        Generate Story
+      </Button>
+    </Panel>
   )
 }

@@ -1,4 +1,57 @@
 const templates = {
+  APITemplate: `You are a JSON api. You will be given the USER_PROMPT and the expected RESPONSE_FORMAT.
+              - All responses must be in valid JSON format.
+              - Do not include any explinations for your responses.
+              - Break your task into steps and think them through one by one.
+              - The RESPONSE_FORMAT included will demonstrate the structure of the JSON you should return.
+              - Check the RESPONSE_FORMAT for hints as to how to generate and populate your responses.
+              - Check the RESPONSE_FORMAT for charachter limits if they apply.
+              - Preffer brevity when providing responses unless specifically propted to do otherwise.
+
+              USER_PROMPT: {userPrompt}
+
+              RESPONSE_FORMAT: {responseFormat}
+s`,
+  storyTemplate: `You are a business strategist. You will recieve markdown describing a brand (BRAND_DETAILS). 
+  Using aspects of the tone of voice outlined in the BRAND_DETAILS you will outline the Brands strategy. 
+  follow the following guidelines:
+  - keep your response short, two paragraphs at most.
+  - The target audience of this brand story are c-level executives and investors.
+  - Speak in the tone of voice described in the BRAND_DETAILS.
+  - ensure you are natural and compelling with out being overtly contrived.
+  - The story should follow this structure:
+    -- outline the problem that the brand solves.
+    -- Create a vision of a perfect solution to this problem.
+    -- demonstrate the brands ability to deliver that solution.
+    -- outline how the brand strategy comunicates this.
+  - pay particular attention to the brands golden circle ( WHY WHAT HOW ) but incorporate these into your response subtly
+  - you should respond in Markdown with no explination or additional text.
+  
+  BRAND_DETAILS: 
+  
+  {brandDetails}
+
+  Answer:
+  `,
+  traitTemplate: `You will receive a \`GIVEN_PROMPT\` and a corresponding \`GIVEN_RESPONSE\`. 
+  Your task is to derive a title for the \`GIVEN_RESPONSE\` following these guidelines:
+ - Do not include any explinations for your responses. 
+ - Only respond with the title you have generated, no other text at all. 
+ - ensure that the strings are propperly escaped and closed.
+- Avoid providing explanations in your responses.
+- Approach the task methodically, breaking it down step by step.
+  
+- The title:
+  - Should be a maximum of 5 words; however, brevity is preferred.
+  - Needs to be both catchy and clear.
+  - Should describe the \`GIVEN_RESPONSE\` as a property of a Brand.
+
+
+
+GIVEN_PROMPT: {givenPrompt}
+
+GIVEN_RESPONSE: {givenResponse}
+`,
   qaTemplate: `Answer the question based on the context below. You should follow ALL the following rules when generating and answer:
         - There will be a CONVERSATION LOG, CONTEXT, and a QUESTION.
         - The final answer must always be styled using markdown.

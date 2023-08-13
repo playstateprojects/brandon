@@ -24,6 +24,28 @@ let pinecone: PineconeClient | null = null
 
 const pineconeIndexName = process.env.PINECONE_INDEX_NAME!
 
+export const createBrandSumation = (brand: Brand): string => {
+  let brandMD = ''
+  brand.properties?.forEach(brandProp => {
+    if (brandProp.description.toLowerCase() == 'what is your brand name?') {
+      brandMD = '# ' + brandProp.value + brandMD + '\n\n'
+    } else if (brandProp.value) {
+      brandMD +=
+        '### ' + brandProp.description + '\n\n' + brandProp.value + '\n\n'
+    }
+  })
+  if (brand.goldenCircle) {
+    brandMD += '# WHY \n\n**' + brand.goldenCircle.why + '**\n\n'
+    brandMD += '# WHAT \n\n**' + brand.goldenCircle.what + '**\n\n'
+    brandMD += '# HOW \n\n**' + brand.goldenCircle.how + '**\n\n'
+  }
+  if (brand.tone) {
+    brandMD += '## Tone of Voice \n\n' + brand.tone.summary + '\n\n'
+  }
+
+  return brandMD
+}
+
 const initPineconeClient = async () => {
   pinecone = new PineconeClient()
   console.log('init pinecone')
