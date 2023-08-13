@@ -25,17 +25,19 @@ export const {
   ],
   callbacks: {
     jwt({ token, profile }) {
-      console.log('HERE')
       if (!token.id) {
+        console.log('sub', token.id == undefined)
         token.id = token.sub
       }
       if (profile) {
-        token.id = profile.id
+        token.id = profile.id ? profile.id : token.id
         token.image = profile.picture
       }
+      console.log('token', token)
       return token
     },
     authorized({ auth }) {
+      console.log('fffffff', auth)
       return !!auth?.user // this ensures there is a logged in user for -every- request
     }
   },

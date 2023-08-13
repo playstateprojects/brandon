@@ -17,8 +17,8 @@ import { nanoid } from 'nanoid'
 import { Document } from 'langchain/document'
 import { OpenAIEmbeddings } from 'langchain/embeddings/openai'
 import { TokenTextSplitter } from 'langchain/text_splitter'
-import Bottleneck from 'bottleneck'
 import { PineconeClient, Vector } from '@pinecone-database/pinecone'
+import Bottleneck from 'bottleneck'
 
 let pinecone: PineconeClient | null = null
 
