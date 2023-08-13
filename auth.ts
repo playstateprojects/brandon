@@ -2,6 +2,7 @@ import NextAuth, { type DefaultSession } from 'next-auth'
 import GitHub from 'next-auth/providers/github'
 import Discord from 'next-auth/providers/discord'
 import Google from 'next-auth/providers/google'
+import { getToken } from 'next-auth/jwt'
 
 declare module 'next-auth' {
   interface Session {
@@ -37,7 +38,6 @@ export const {
       return token
     },
     authorized({ auth }) {
-      console.log('fffffff', auth)
       return !!auth?.user // this ensures there is a logged in user for -every- request
     }
   },

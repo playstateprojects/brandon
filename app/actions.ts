@@ -171,8 +171,6 @@ export async function saveBrand(brand: Brand, userId: string): Promise<void> {
   if (isSavingBrand) {
     return
   }
-  console.log('saving.....', brand.story)
-  brand.story = 'test'
   try {
     isSavingBrand = true
     const payload = {
