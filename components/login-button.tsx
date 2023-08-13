@@ -24,7 +24,7 @@ export function LoginButton({
         onClick={() => {
           setIsLoading(true)
           // next-auth signIn() function doesn't work yet at Edge Runtime due to usage of BroadcastChannel
-          signIn('github', { callbackUrl: `http://localhost:3000/` })
+          signIn('github', { callbackUrl: `/` })
         }}
         disabled={isLoading}
         className={cn(className)}
@@ -42,7 +42,7 @@ export function LoginButton({
         onClick={() => {
           setIsLoading(true)
           // next-auth signIn() function doesn't work yet at Edge Runtime due to usage of BroadcastChannel
-          signIn('discord', { callbackUrl: `http://localhost:3000/` })
+          signIn('discord', { callbackUrl: `/` })
         }}
         disabled={isLoading}
         className={cn(className)}
@@ -60,7 +60,7 @@ export function LoginButton({
         onClick={() => {
           setIsLoading(true)
           // next-auth signIn() function doesn't work yet at Edge Runtime due to usage of BroadcastChannel
-          signIn('google', { callbackUrl: `http://localhost:3000/` })
+          signIn('google', { callbackUrl: `/` })
         }}
         disabled={isLoading}
         className={cn(className)}

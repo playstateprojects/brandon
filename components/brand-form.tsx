@@ -98,13 +98,7 @@ export function BrandForm({ onFormSubmit, userBrand }: BrandQuestionsProps) {
     }
   }
   const maxCharacterCount = 100
-  const nextQuestion = React.useCallback(() => {
-    if (currentQuestion < questions.length - 1) {
-      setCurrentQuestion(prev => prev + 1)
-    } else {
-      handleSubmit()
-    }
-  }, [currentQuestion])
+
   const prevQuestion = () => {
     if (currentQuestion > 0) {
       setCurrentQuestion(prev => prev - 1)
@@ -134,6 +128,11 @@ export function BrandForm({ onFormSubmit, userBrand }: BrandQuestionsProps) {
     onFormSubmit(userBrand)
     // nextQuestion()
   }
+  const nextQuestion = React.useCallback(() => {
+    if (currentQuestion < questions.length - 1) {
+      setCurrentQuestion(prev => prev + 1)
+    }
+  }, [currentQuestion])
   React.useEffect(() => {
     const textarea = textAreaRefs.current[currentQuestion]
     if (textarea) {

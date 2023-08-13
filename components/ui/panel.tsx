@@ -17,9 +17,9 @@ interface PanelProps {
 
 const Panel = ({ title, children, information }: PanelProps) => {
   return (
-    <div className="mx-auto max-w-2xl px-4 my-2">
+    <div className="mx-auto my-2 max-w-2xl px-4">
       <div className="rounded-lg border bg-background p-8">
-        <h1 className="mb-2 text-lg font-semibold relative">
+        <h1 className="relative mb-2 text-lg font-semibold">
           {title}{' '}
           <Tooltip>
             <TooltipTrigger asChild>
@@ -50,7 +50,7 @@ const PanelText = ({ text }: PanelTextProps) => {
   return (
     <>
       <MemoizedReactMarkdown
-        className="prose break-words dark:prose-invert prose-p:leading-relaxed prose-pre:p-0 my-4"
+        className="prose my-4 break-words dark:prose-invert prose-p:leading-relaxed prose-pre:p-0"
         remarkPlugins={[remarkGfm, remarkMath]}
         components={{
           p({ children }) {

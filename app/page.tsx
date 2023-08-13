@@ -31,14 +31,14 @@ export default async function IndexPage() {
             loading="lazy"
           />
         </div>
-        <div className="mt-4">
+        {/* <div className="mt-4">
           <Link
             href="/sign-in"
             className="rounded-full border-2 border-[#000] bg-transparent px-4 py-1 text-black hover:bg-[#E6FE52] hover:text-black "
           >
             Get started
           </Link>
-        </div>
+        </div> */}
       </div>
     </>
   )
