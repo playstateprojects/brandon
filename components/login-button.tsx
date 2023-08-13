@@ -5,20 +5,13 @@ import { signIn } from 'next-auth/react'
 
 import { cn } from '@/lib/utils'
 import { Button, type ButtonProps } from '@/components/ui/button'
-import {
-  IconGitHub,
-  IconSpinner,
-  IconDiscord,
-  IconGoogle
-} from '@/components/ui/icons'
+import { IconGitHub, IconSpinner, IconDiscord, IconGoogle } from './ui/icons'
 
 interface LoginButtonProps extends ButtonProps {
   showGithubIcon?: boolean
-  text?: string
 }
 
 export function LoginButton({
-  text = 'Login with GitHub',
   showGithubIcon = true,
   className,
   ...props
@@ -31,7 +24,7 @@ export function LoginButton({
         onClick={() => {
           setIsLoading(true)
           // next-auth signIn() function doesn't work yet at Edge Runtime due to usage of BroadcastChannel
-          signIn('github', { callbackUrl: `/` })
+          signIn('github', { callbackUrl: `http://localhost:3000/` })
         }}
         disabled={isLoading}
         className={cn(className)}
@@ -42,14 +35,14 @@ export function LoginButton({
         ) : showGithubIcon ? (
           <IconGitHub className="mr-2" />
         ) : null}
-        {text}
+        Login with Github
       </Button>
       <Button
         variant="outline"
         onClick={() => {
           setIsLoading(true)
           // next-auth signIn() function doesn't work yet at Edge Runtime due to usage of BroadcastChannel
-          signIn('discord', { callbackUrl: `/` })
+          signIn('discord', { callbackUrl: `http://localhost:3000/` })
         }}
         disabled={isLoading}
         className={cn(className)}
@@ -67,7 +60,7 @@ export function LoginButton({
         onClick={() => {
           setIsLoading(true)
           // next-auth signIn() function doesn't work yet at Edge Runtime due to usage of BroadcastChannel
-          signIn('google', { callbackUrl: `/` })
+          signIn('google', { callbackUrl: `http://localhost:3000/` })
         }}
         disabled={isLoading}
         className={cn(className)}

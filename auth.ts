@@ -18,11 +18,6 @@ export const {
   CSRF_experimental // will be removed in future
 } = NextAuth({
   providers: [
-    GitHub,
-    Discord({
-      clientId: process.env.DISCORD_CLIENT_ID,
-      clientSecret: process.env.DISCORD_CLIENT_SECRET
-    }),
     Google({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET
@@ -30,6 +25,7 @@ export const {
   ],
   callbacks: {
     jwt({ token, profile }) {
+      console.log('HERE')
       if (!token.id) {
         token.id = token.sub
       }

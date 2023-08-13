@@ -169,9 +169,10 @@ export async function shareChat(chat: Chat) {
 let isSavingBrand = false
 export async function saveBrand(brand: Brand, userId: string): Promise<void> {
   if (isSavingBrand) {
-    console.log('saving.....')
     return
   }
+  console.log('saving.....', brand.story)
+  brand.story = 'test'
   try {
     isSavingBrand = true
     const payload = {
@@ -179,6 +180,7 @@ export async function saveBrand(brand: Brand, userId: string): Promise<void> {
       userId
     }
     let res = await kv.hmset(`brand:${userId}`, payload)
+    console.log('payload', payload.story)
     embedBrand(brand)
   } catch (error) {
     throw new Error('Failed to save brand')
@@ -192,6 +194,8 @@ export async function getBrand(userId: string): Promise<Brand> {
     const brandData = await kv.hgetall(`brand:${userId}`)
 
     if (brandData) {
+      console.log('--cccc----', brandData.story)
+      console.log('--ccdcc----', brandData.id)
       // Create a new Brand object using the retrieved data
       const brand: Brand = {
         id: brandData.id as string,
@@ -200,6 +204,7 @@ export async function getBrand(userId: string): Promise<Brand> {
         archetypeData: brandData.archetypeData as ArchetypeData,
         goldenCircle: brandData.goldenCircle as GoldenCircle,
         tone: brandData.tone as ToneOfVoice,
+        story: brandData.story as string,
         userId: userId as string
       }
       return brand

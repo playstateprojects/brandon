@@ -5,6 +5,7 @@ import { Brand, ToneOfVoice } from '@/lib/types'
 import { Button } from '@/components/ui/button'
 import { LoaderIcon } from 'react-hot-toast'
 import { Panel, PanelText } from './ui/panel'
+import { saveBrand } from '@/app/actions'
 
 type StoryPanelProps = {
   brand: Brand
@@ -36,12 +37,20 @@ export function StoryPanel({ brand }: StoryPanelProps) {
   const [brandStory, setBrandStory] = React.useState('')
   // setBrandStory(createBrandSumation(brand))
 
-  // React.useEffect(() => {
-  //   setUserBrand(brand)
-  //   const summary = createBrandSumation(brand)
-  //   // if (!summary || typeof summary != 'string') return
-  //   setBrandStory(summary)
-  // }, [brand])
+  React.useEffect(() => {
+    setUserBrand(brand)
+    if (brand.story) {
+      setBrandStory(brand.story)
+    }
+  }, [brand])
+
+  const saveStory = async (newStory: string) => {
+    setIsLoading(true)
+    const updatedBrand = { ...userBrand, story: newStory }
+    console.log('updB', updatedBrand.story)
+    await saveBrand(updatedBrand, updatedBrand.id)
+    setIsLoading(false)
+  }
 
   const fetchStory = async () => {
     setIsLoading(true)
@@ -61,6 +70,7 @@ export function StoryPanel({ brand }: StoryPanelProps) {
     // Convert the response body to JSON
     const json = await res.json()
     setBrandStory(json.text)
+
     console.log('got story')
     // const story = JSON.parse(json)
     // const updatedBrand = { ...userBrand, tone: tone as ToneOfVoice }
@@ -69,6 +79,7 @@ export function StoryPanel({ brand }: StoryPanelProps) {
     // })
     // await saveBrand(updatedBrand, userBrand.userId)
     setIsLoading(false)
+    saveStory(json.text)
   }
   return (
     <Panel title="Story">
@@ -85,6 +96,14 @@ export function StoryPanel({ brand }: StoryPanelProps) {
         )}
         Generate Story
       </Button>
+      {/* <Button onClick={saveStory}>
+        {isLoading && (
+          <>
+            <LoaderIcon></LoaderIcon>&nbsp;
+          </>
+        )}
+        Save Story
+      </Button> */}
     </Panel>
   )
 }
