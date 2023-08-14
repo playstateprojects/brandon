@@ -2,8 +2,7 @@ import NextAuth, { type DefaultSession } from 'next-auth'
 import GitHub from 'next-auth/providers/github'
 import Discord from 'next-auth/providers/discord'
 import Google from 'next-auth/providers/google'
-import { getToken } from 'next-auth/jwt'
-
+import EmailProvider from 'next-auth/providers/email'
 declare module 'next-auth' {
   interface Session {
     user: {
@@ -19,6 +18,11 @@ export const {
   CSRF_experimental // will be removed in future
 } = NextAuth({
   providers: [
+    GitHub,
+    Discord({
+      clientId: process.env.DISCORD_CLIENT_ID,
+      clientSecret: process.env.DISCORD_CLIENT_SECRET
+    }),
     Google({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET
