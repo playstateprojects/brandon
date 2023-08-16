@@ -35,7 +35,7 @@ export const {
         token.id = token.sub
       }
       if (profile) {
-        token.id = profile.id ? profile.id : token.id
+        // token.id = profile.id ? profile.id : token.id
         token.image = profile.picture
       }
       console.log('token', token)

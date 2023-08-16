@@ -82,13 +82,10 @@ dependencies:
     version: 13.4.13(react-dom@18.2.0)(react@18.2.0)
   next-auth:
     specifier: 0.0.0-manual.83c4ebd1
-    version: 0.0.0-manual.83c4ebd1(next@13.4.13)(nodemailer@6.9.4)(react@18.2.0)
+    version: 0.0.0-manual.83c4ebd1(next@13.4.13)(react@18.2.0)
   next-themes:
     specifier: ^0.2.1
     version: 0.2.1(next@13.4.13)(react-dom@18.2.0)(react@18.2.0)
-  nodemailer:
-    specifier: ^6.9.4
-    version: 6.9.4
   openai-edge:
     specifier: ^0.5.1
     version: 0.5.1
@@ -218,7 +215,7 @@ packages:
       - supports-color
     dev: false
 
-  /@auth/core@0.0.0-manual.59d8da33(nodemailer@6.9.4):
+  /@auth/core@0.0.0-manual.59d8da33:
     resolution: {integrity: sha512-ZTaUedTobGEvQPhEeJLmnsdGbztG10T0rK8TA4wH87Eb8oBHInI//3zRngX6T9hEcZ+/OJnIANw0JrGDqUDREA==}
     peerDependencies:
       nodemailer: ^6.8.0
@@ -229,7 +226,6 @@ packages:
       '@panva/hkdf': 1.1.1
       cookie: 0.5.0
       jose: 4.14.4
-      nodemailer: 6.9.4
       oauth4webapi: 2.3.0
       preact: 10.11.3
       preact-render-to-string: 5.2.3(preact@10.11.3)
@@ -4349,7 +4345,7 @@ packages:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
     dev: true
 
-  /next-auth@0.0.0-manual.83c4ebd1(next@13.4.13)(nodemailer@6.9.4)(react@18.2.0):
+  /next-auth@0.0.0-manual.83c4ebd1(next@13.4.13)(react@18.2.0):
     resolution: {integrity: sha512-6nUXtVrZqTWvVz2NhUB/xbMyzxUSQycQWOquACwdpk63AcnZ3g01v+W0UX9paqkGIdqLPtI/pL6rA2N+MT58SQ==}
     peerDependencies:
       next: ^13.4.6
@@ -4359,9 +4355,8 @@ packages:
       nodemailer:
         optional: true
     dependencies:
-      '@auth/core': 0.0.0-manual.59d8da33(nodemailer@6.9.4)
+      '@auth/core': 0.0.0-manual.59d8da33
       next: 13.4.13(react-dom@18.2.0)(react@18.2.0)
-      nodemailer: 6.9.4
       react: 18.2.0
     dev: false
 
@@ -4437,11 +4432,6 @@ packages:
   /node-releases@2.0.13:
     resolution: {integrity: sha512-uYr7J37ae/ORWdZeQ1xxMJe3NtdmqMC/JZK+geofDrkLUApKRHPd18/TxtBOJ4A0/+uUIliorNrfYV6s1b02eQ==}
     dev: true
-
-  /nodemailer@6.9.4:
-    resolution: {integrity: sha512-CXjQvrQZV4+6X5wP6ZIgdehJamI63MFoYFGGPtHudWym9qaEHDNdPzaj5bfMCvxG1vhAileSWW90q7nL0N36mA==}
-    engines: {node: '>=6.0.0'}
-    dev: false
 
   /normalize-path@3.0.0:
     resolution: {integrity: sha512-6eZs5Ls3WtCisHWp9S2GUy8dqkpGi4BVSz3GaqiE6ezub0512ESztXUwUB6C6IKbQkY2Pnb/mD4WYojCRwcwLA==}

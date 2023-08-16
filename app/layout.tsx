@@ -11,10 +11,10 @@ import { Header } from '@/components/header'
 import { Analytics } from '@vercel/analytics/react'
 export const metadata: Metadata = {
   title: {
-    default: 'Next.js AI Chatbot',
-    template: `%s - Next.js AI Chatbot`
+    default: 'Brandon AI',
+    template: `%s - Brandon AI`
   },
-  description: 'An AI-powered chatbot template built with Next.js and Vercel.',
+  description: 'An AI-powered brand sttrategist',
   themeColor: [
     { media: '(prefers-color-scheme: light)', color: 'white' },
     { media: '(prefers-color-scheme: dark)', color: 'black' }
