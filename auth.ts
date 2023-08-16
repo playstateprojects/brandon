@@ -42,6 +42,7 @@ export const {
       return token
     },
     authorized({ auth }) {
+      console.log('authhhhh', auth)
       return !!auth?.user // this ensures there is a logged in user for -every- request
     }
   },

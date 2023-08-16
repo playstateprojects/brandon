@@ -9,7 +9,7 @@ export const runtime = 'edge'
 
 export default async function IndexPage() {
   const session = await auth()
-
+  console.log('sessss', session)
   if (session?.user) {
     const brand = await getBrand(session.user.id)
     if (brand.properties && brand.properties.length > 2) {
